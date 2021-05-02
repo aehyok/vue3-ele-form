@@ -5,7 +5,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
-
+// 添加测试  注释
 export default {
   name: 'App',
   components: {
