@@ -4,7 +4,7 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-form :model="formConfig.formData" label-width="120px" ref="refForm">
+        <el-form :model="formConfig.formData" label-width="120px" :ref="dom">
           <FormView
             :columnList="formConfig.formListItem"
             :formData="formConfig.formData"
@@ -36,21 +36,22 @@
   </div>
 </template>
 <script>
+import { defineComponent, reactive, toRefs, ref } from '@vue/runtime-core'
 import FormView from '../components/input/formView.vue'
 // import VJsoneditor from 'v-jsoneditor'
 
-export default {
+export default defineComponent({
   components: {
     FormView,
     // VJsoneditor
   },
-  created () {
-    console.log(this.$router, 'this.$router', 'form-app')
-
-  },
-  methods: {
-    submitForm () {
-      this.$refs.refForm.validate(valid => {
+  setup(props, context){
+    let refs = ref('')
+    const dom = el => {
+      refs = el
+    }
+    const submitForm = () => {
+      refs.validate(valid => {
         if (valid) {
           console.log(valid, 'this.valid')
         } else {
@@ -59,10 +60,12 @@ export default {
         return false
       })
     }
-  },
-  data () {
-    return {
-      options: { mode: 'code', mainMenuBar: false },
+
+    const state = reactive({
+      options: {
+          mode: 'code',
+          mainMenuBar: false,
+      },
       show: true,
       formConfig: {
         cols: 24,
@@ -202,8 +205,13 @@ export default {
           isValid: true
         }
       }
+    })
+    return {
+      ...toRefs(state),
+      submitForm,
+      dom
     }
-  }
-}
+  },
+})
 </script>
 <style scoped></style>
