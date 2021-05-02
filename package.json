@@ -1,15 +1,29 @@
 {
-  "name": "vue3-element-form",
-  "version": "0.1.0",
-  "private": true,
+  "name": "aehyok-form",
+  "version": "1.0.29",
+  "main": "lib/aehyok-form.umd.min.js",
+  "author": "aehyok@163.com",
+  "description": "A vue component for dynamic Form",
+  "keywords": [
+    "vue",
+    "et",
+    "element Form",
+    "dynamic Form",
+    "Form Create"
+  ],
+  "private": false,
   "scripts": {
     "start": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name aehyok-form --dest lib ./src/index.js",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.11.1",
     "element-plus": "^1.0.2-beta.41",
     "register-service-worker": "^1.7.1",
+    "v-jsoneditor": "^1.4.2",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
