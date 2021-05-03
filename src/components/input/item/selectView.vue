@@ -14,7 +14,8 @@ import { defineComponent, computed } from 'vue';
   </el-form-item>
 </template>
 <script>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, reactive, toRefs } from 'vue'
+import { getContentTypeList } from '@/mock/api'
 export default defineComponent({
   props: {
     column: {
@@ -27,7 +28,12 @@ export default defineComponent({
     },
   },
   setup(props, context) {
-    const { column }  = props
+    const { column } = props
+    let { codeTable } = props.column.codeTable
+
+    if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
+      codeTable = 'type'
+    }
     const rules = [
       {
         required: column.required,
@@ -39,10 +45,22 @@ export default defineComponent({
         return props.data
       },
       set: function(val) {
-        props.data = val
+        // props.data = val
+        context.emit('update:data', val)
       },
     })
+    const state = reactive({
+      list: []
+    })
+    const getList = (type) => {
+      getContentTypeList(type).then( res => {
+        state.list = res.data
+      })
+    }
+    getList(codeTable)
+
     return {
+      ...toRefs(state),
       rules,
       value,
     }

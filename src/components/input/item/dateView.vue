@@ -42,7 +42,8 @@ export default defineComponent({
         return props.data
       },
       set: function(val) {
-        state.data = val
+        // props.data = val
+        context.emit('update:data', val)
       },
     })
     return {

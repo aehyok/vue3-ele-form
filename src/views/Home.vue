@@ -172,7 +172,7 @@ export default defineComponent({
           {
             name: 'creType',
             type: 'select',
-            multiple: true,
+            // multiple: true,
             codeTable: 'politicalstatus',
             title: '证件类型'
           },

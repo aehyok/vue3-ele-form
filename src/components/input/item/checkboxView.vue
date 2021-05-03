@@ -36,7 +36,8 @@ export default defineComponent({
         return props.data
       },
       set: function(val) {
-        props.data = val
+        // props.data = val
+        context.emit('update:data', val)
       },
     })
 
