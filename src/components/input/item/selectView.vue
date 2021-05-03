@@ -1,3 +1,4 @@
+import { defineComponent, computed } from 'vue';
 <!--简单文本框-->
 <template>
   <el-form-item :label="column.title" :prop="column.name" :rules="rules">
@@ -13,9 +14,8 @@
   </el-form-item>
 </template>
 <script>
-import { formItemMixins } from './formItemMixins.js'
-export default {
-  mixins: [ formItemMixins ],
+import { defineComponent, computed } from 'vue'
+export default defineComponent({
   props: {
     column: {
       type: [Object],
@@ -26,27 +26,26 @@ export default {
       default: () => {},
     },
   },
-  data() {
-    return {
-      // list: [],
-      rules: [
-        {
-          required: this.column.required,
-          message: '请输入' + this.column.title,
-        },
-      ],
-    }
-  },
-  computed: {
-    value: {
+  setup(props, context) {
+    const { column }  = props
+    const rules = [
+      {
+        required: column.required,
+        message: `请输入${column.title}`,
+      },
+    ]
+    const value =computed ({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        console.log('this.select', typeof val, val)
-        this.$emit('update:data', val)
+        props.data = val
       },
-    },
+    })
+    return {
+      rules,
+      value,
+    }
   },
-}
+})
 </script>

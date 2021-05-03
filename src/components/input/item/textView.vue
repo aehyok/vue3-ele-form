@@ -5,7 +5,9 @@
   </el-form-item>
 </template>
 <script>
-export default {
+import { computed, defineComponent } from "@vue/runtime-core"
+
+export default  defineComponent({
   props: {
     column: {
       type: [Object],
@@ -16,27 +18,28 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      columnName: '',
-      rules: [
-        {
-          required: this.column.required,
-          message: '请输入' + this.column.title,
-          trigger: ['blur', 'change'],
-        },
-      ],
-    }
-  },
-  computed: {
-    value: {
+  setup(props, context) {
+    const { column } = props
+    const rules = [
+      {
+        required: column.required,
+        message: `请输入${column.title}`,
+        trigger: ['blur', 'change'],
+      }
+    ]
+
+    const value = computed({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        this.$emit('update:data', val)
-      },
-    },
-  },
-}
+        props.data = val
+      }
+    })
+    return {
+      rules,
+      value,
+    }
+  }
+})
 </script>

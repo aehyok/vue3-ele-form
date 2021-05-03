@@ -24,9 +24,10 @@
   </el-row>
 </template>
 <script>
+import { defineComponent } from 'vue'
 import componentView from './componentView.vue'
 
-export default {
+export default  defineComponent({
   name: 'formView',
   components: {
     componentView,
@@ -45,9 +46,9 @@ export default {
       default: 12,
     },
   },
-  created() {
-    console.log(this, 'this.formView')
-  },
-}
+  setup(props, context) {
+    console.log(props, 'setup.formView')
+  }
+})
 </script>
 <style scoped></style>

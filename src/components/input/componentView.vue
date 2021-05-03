@@ -11,18 +11,18 @@
     v-model:data="formData[column.name]"
     :columnSpan="columnSpan"
   />
-  <!-- <component
+  <component
     v-if="column.type.includes('View')"
     :is="column.type || registerComponent"
     :column="column"
     :formData="formData"
     v-model:data="formData[column.name]"
     :columnSpan="columnSpan"
-  /> -->
+  />
 </el-col>
 </template>
 <script>
-import { createApp } from 'vue'
+import { createApp, defineComponent } from 'vue'
 import textView from '@/components/input/item/textView.vue'
 import textareaView from '@/components/input/item/textareaView.vue'
 import numberView from '@/components/input/item/numberView.vue'
@@ -34,7 +34,7 @@ import daterangeView from '@/components/input/item/daterangeView.vue'
 import selectView from '@/components/input/item/selectView.vue'
 import imageView from '@/components/input/item/imageView.vue'
 
-export default {
+export default  defineComponent({
   name: 'formView',
   components: {
     textView,
@@ -62,11 +62,9 @@ export default {
       default: 12,
     },
   },
-  created() {
-    console.log(this, 'this.formView')
-  },
-  methods: {
-    registerComponent(componentName) {
+  setup(props, context) {
+    console.log(props, 'setup.componentView')
+    const registerComponent = (componentName) => {
       console.log(componentName, 'this.componentName')
       return createApp(componentName.default)
       // return import(`@/components/input/item/${componentName}.vue`).then(
@@ -75,8 +73,11 @@ export default {
       //     return Vue.extend(component.default)
       //   },
       // )
-    },
+    }
+    return {
+
+    }
   },
-}
+})
 </script>
 <style scoped></style>

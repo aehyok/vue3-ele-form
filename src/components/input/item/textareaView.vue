@@ -12,7 +12,9 @@
   </el-form-item>
 </template>
 <script>
-export default {
+import { defineComponent, computed } from "vue"
+
+export default defineComponent({
   props: {
     column: {
       type: [Object],
@@ -23,25 +25,26 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      rules: [
-        {
-          required: this.column.required,
-          message: '请输入' + this.column.title,
-        },
-      ],
-    }
-  },
-  computed: {
-    value: {
+  setup(props, context) {
+    const { column }  = props
+    const rules = [
+      {
+        required: column.required,
+        message: `请输入${column.title}`,
+      },
+    ]
+    const value =computed ({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        this.$emit('update:data', val)
+        props.data = val
       },
-    },
+    })
+    return {
+      rules,
+      value,
+    }
   },
-}
+})
 </script>

@@ -1,3 +1,4 @@
+import { defineComponent, computed, toRefs } from 'vue';
 <!--radio 单选框-->
 <template>
   <div>
@@ -11,13 +12,13 @@
   </div>
 </template>
 <script>
-import { formItemMixins } from './formItemMixins.js'
-export default {
+import { getContentTypeList } from '@/mock/api'
+import { defineComponent, computed, toRefs, reactive } from 'vue'
+export default defineComponent({
   // // 组件嵌套如何引用的问题
   // components: {
   //   FormView: () => import('@/components/input/formView'),
   // },
-  mixins: [formItemMixins],
   props: {
     column: {
       type: [Object],
@@ -27,45 +28,59 @@ export default {
       type: [Object],
       default: () => {},
     },
-    columnSpan: {
-      type: Number,
-      default: 12,
-    },
     data: {
       type: Number,
       default: undefined,
     },
   },
-  data() {
-    return {
-      // list: [],
-      rules: [
-        {
-          // 加上双？？，防止出现选中后提示请选择"this.column.title"
-          required: this.column.required ?? false,
-          message: '请选择' + this.column.title,
-          trigger: 'change',
-        },
-      ],
+  setup(props, context) {
+    const { column } = props
+    let { codeTable } = props.column.codeTable
+
+    if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
+      codeTable = 'type'
     }
-  },
-  computed: {
-    value: {
+    const rules = [
+      {
+        // 加上双？？，防止出现选中后提示请选择"this.column.title"
+        required: column.required ?? false,
+        message: `请选择${column.title}`,
+        trigger: 'change',
+      },
+    ]
+    const value =computed ({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        console.log(val, typeof val, 'this.radioView.val')
-        this.$emit('update:data', val)
+        props.data = val
       },
-    },
-  },
-  methods: {
+    })
+
     // radio change事件去切换控制其他组件，或者其他几个组件（先考虑控制一个）
     // 要通过一个字段控制，如果是这个字段，则可以进行控制切换状态
-    radioChange(e) {
-      console.log(e, this.column, 'this.radioChange')
-    },
+    const radioChange = (e) => {
+      console.log(e, column, 'this.radioChange')
+      context.emit("evenName", '')
+    }
+
+    const state = reactive({
+      list: []
+    })
+    const getList = (type) => {
+      getContentTypeList(type).then( res => {
+        state.list = res.data
+      })
+    }
+    getList(codeTable)
+
+    return {
+      ...toRefs(state),
+      rules,
+      value,
+      radioChange
+
+    }
   },
-}
+})
 </script>

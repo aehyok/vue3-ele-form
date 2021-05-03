@@ -1,3 +1,4 @@
+import { defineComponent } from '@vue/runtime-core';
 <!--日期范围-->
 <template>
   <div>
@@ -14,7 +15,8 @@
   </div>
 </template>
 <script>
-export default {
+import { defineComponent, computed}  from 'vue'
+export default defineComponent({
   props:{
     column: {
       type: [Object],
@@ -25,21 +27,18 @@ export default {
       default: () => {},
     },
   },
-  data(){
-    return {
-
-    }
-  },
-  computed: {
-    value: {
+   setup(props,context) {
+    const value =computed ({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        console.log(val,'sssssss')
-        this.$emit('update:data',val)
+        props.data = val
       },
-    },
-  },
-}
+    })
+    return {
+      value
+    }
+   }
+})
 </script>

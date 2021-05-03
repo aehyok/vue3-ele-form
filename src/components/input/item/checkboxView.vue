@@ -11,9 +11,9 @@
   </div>
 </template>
 <script>
-import { formItemMixins } from './formItemMixins.js'
-export default {
-  mixins: [formItemMixins],
+import { defineComponent, computed, reactive, toRefs } from 'vue'
+import { getContentTypeList } from '@/mock/api'
+export default defineComponent({
   props: {
     column: {
       type: [Object],
@@ -24,20 +24,35 @@ export default {
       default: () => [],
     },
   },
-  data() {
-    return {
-      // list: [],
+  setup(props, context){
+
+    let { codeTable } = props.column.codeTable
+
+    if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
+      codeTable = 'type'
     }
-  },
-  computed: {
-    value: {
+    const value =computed ({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        this.$emit('update:data', val)
+        props.data = val
       },
-    },
+    })
+
+    const state = reactive({
+      list: []
+    })
+    const getList = (type) => {
+      getContentTypeList(type).then( res => {
+        state.list = res.data
+      })
+    }
+    getList(codeTable)
+    return {
+      ...toRefs(state),
+      value
+    }
   },
-}
+})
 </script>

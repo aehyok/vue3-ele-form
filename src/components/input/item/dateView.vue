@@ -1,3 +1,4 @@
+import defineComponent from './daterangeView.vue';
 <!--日期格式类型-->
 <template>
   <div>
@@ -5,19 +6,16 @@
       <el-date-picker
         style="width:100%"
         v-model="value"
-        align="right"
         type="date"
         placeholder="选择日期"
-        format="yyyy 年 MM 月 dd 日"
-        value-format="yyyy-MM-dd"
-        :picker-options="pickerOptions"
       >
       </el-date-picker>
     </el-form-item>
   </div>
 </template>
 <script>
-export default {
+import { defineComponent, computed, reactive } from 'vue'
+export default defineComponent({
   props: {
     column: {
       type: [Object],
@@ -28,31 +26,29 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      pickerOptions: {
-        // disabledDate(time) {
-        //   return time.getTime() < Date.now()
-        // },
+  setup(props, context){
+    const { column, data } = props
+    const state = reactive({
+      data: data
+    })
+    const rules = [
+      {
+        required: column.required,
+        message: `请输入${column.title}`,
       },
-      rules: [
-        {
-          required: this.column.required,
-          message: '请输入' + this.column.title,
-        },
-      ],
-    }
-  },
-  computed: {
-    value: {
+    ]
+    const value = computed ({
       get: function() {
-        return this.data
+        return props.data
       },
       set: function(val) {
-        console.log('this.date', typeof val, val)
-        this.$emit('update:data', val)
+        state.data = val
       },
-    },
+    })
+    return {
+      rules,
+      value,
+    }
   },
-}
+})
 </script>

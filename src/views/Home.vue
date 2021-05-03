@@ -50,16 +50,6 @@ export default defineComponent({
     const dom = el => {
       refs = el
     }
-    const submitForm = () => {
-      refs.validate(valid => {
-        if (valid) {
-          console.log(valid, 'this.valid')
-        } else {
-          console.log(valid, '验证失败')
-        }
-        return false
-      })
-    }
 
     const state = reactive({
       options: {
@@ -206,6 +196,17 @@ export default defineComponent({
         }
       }
     })
+    const submitForm = () => {
+      console.log(state.formConfig.formData , 'formData')
+      refs.validate(valid => {
+        if (valid) {
+          console.log(valid, 'this.valid')
+        } else {
+          console.log(valid, '验证失败')
+        }
+        return false
+      })
+    }
     return {
       ...toRefs(state),
       submitForm,
