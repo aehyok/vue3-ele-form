@@ -1,4 +1,3 @@
-import { defineComponent, computed } from 'vue';
 <!--switch切换本身就有值，可以考虑不进行判断必填项-->
 <template>
   <el-form-item :label="column.title" :prop="column.name" >

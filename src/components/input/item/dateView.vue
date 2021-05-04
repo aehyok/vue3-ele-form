@@ -1,17 +1,14 @@
-import defineComponent from './daterangeView.vue';
 <!--日期格式类型-->
 <template>
-  <div>
-    <el-form-item :label="column.title" :prop="column.name" :rules="rules">
-      <el-date-picker
-        style="width:100%"
-        v-model="value"
-        type="date"
-        placeholder="选择日期"
-      >
-      </el-date-picker>
-    </el-form-item>
-  </div>
+  <el-form-item :label="column.title" :prop="column.name" :rules="rules">
+    <el-date-picker
+      style="width:100%"
+      v-model="value"
+      type="date"
+      placeholder="选择日期"
+    >
+    </el-date-picker>
+  </el-form-item>
 </template>
 <script>
 import { defineComponent, computed, reactive } from 'vue'

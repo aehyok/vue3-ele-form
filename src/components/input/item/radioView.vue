@@ -1,7 +1,5 @@
-import { defineComponent, computed, toRefs } from 'vue';
 <!--radio 单选框-->
 <template>
-  <div>
     <el-form-item :label="column.title" :prop="column.name" :rules="rules">
       <el-radio-group v-model="value" @change="radioChange">
         <el-radio v-for="item in list" :label="item.id" :key="item.id">
@@ -9,7 +7,6 @@ import { defineComponent, computed, toRefs } from 'vue';
         </el-radio>
       </el-radio-group>
     </el-form-item>
-  </div>
 </template>
 <script>
 import { getContentTypeList } from '@/mock/api'
@@ -85,3 +82,9 @@ export default defineComponent({
   },
 })
 </script>
+<style scoped>
+:deep(.el-form-item__content) {
+  /* display: flex; */
+  /* ; */
+}
+</style>

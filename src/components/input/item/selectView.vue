@@ -1,4 +1,3 @@
-import { defineComponent, computed } from 'vue';
 <!--简单文本框-->
 <template>
   <el-form-item :label="column.title" :prop="column.name" :rules="rules">

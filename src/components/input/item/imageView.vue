@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style scoped>
-::v-deep .el-upload {
+:deep(.el-upload) {
   border: 1px dashed #d9d9d9 !important;
   border-radius: 6px;
   cursor: pointer;
@@ -133,7 +133,7 @@ export default {
   overflow: hidden;
 }
 
-::v-deep .el-upload:hover {
+:deep(.el-upload:hover) {
   border-color: #409eff;
 }
 

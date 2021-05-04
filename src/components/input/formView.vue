@@ -47,7 +47,7 @@ export default  defineComponent({
     },
   },
   setup(props, context) {
-    console.log(props, 'setup.formView')
+    // console.log(props, 'setup.formView')
   }
 })
 </script>
