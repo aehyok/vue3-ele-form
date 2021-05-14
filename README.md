@@ -2,13 +2,13 @@
 
 A vue component for dynamic form create.
 
-### 本项目适合 Vue3 ElementUI 下进行使用的，目前基础功能已经具备。
+- 本项目适合 Vue3 ElementUI 下进行使用的，目前基础功能已经具备。
 
-### clone 后可以直接 npm install,然后 npm run start 即可开启 demo 查看。
+- clone 后可以直接 npm install,然后 npm run start 即可开启 demo 查看。
 
-### 根目录下的 index.js 为发布到 npmjs 使用的文件
+- 根目录下的 index.js 为发布到 npmjs 使用的文件
 
-### 根目录下的 main.js 为 npm run start 运行 demo 根据路由直接查看
+- 根目录下的 main.js 为 npm run start 运行 demo 根据路由直接查看
 
 # install
 
