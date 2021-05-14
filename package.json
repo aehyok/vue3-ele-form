@@ -1,22 +1,24 @@
 {
   "name": "aehyok-form-vue3",
-  "version": "1.0.31",
+  "version": "1.0.34",
   "main": "lib/aehyok-form.umd.min.js",
   "author": "aehyok@163.com",
-  "description": "A vue component for dynamic Form",
+  "description": "A vue component for dynamic Form Table",
   "keywords": [
     "vue",
     "et",
-    "element Form",
+    "element-plus Form",
+    "element-plus Table",
     "dynamic Form",
-    "Form Create"
+    "dynamic Table",
+    "Form Create",
+    "Table Create"
   ],
   "private": false,
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lib": "vue-cli-service build --target lib --name aehyok-form --dest lib ./src/index.js",
-    "lint": "vue-cli-service lint"
+    "lib": "vue-cli-service build --target lib --name aehyok-form --dest lib ./src/index.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
