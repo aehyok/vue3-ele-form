@@ -37,9 +37,12 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "css-loader": "^5.2.4",
     "sass": "^1.32.13",
-    "sass-loader": "^10.2.0"
+    "sass-loader": "^10.2.0",
+    "url-loader": "^4.1.1"
   },
+  "license": "MIT",
   "browserslist": [
     "> 1%",
     "last 2 versions",
