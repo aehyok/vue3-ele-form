@@ -56,25 +56,25 @@ export default  defineComponent({
       } else {
         if (state.editor) {
           state.internalChange = true
-          context.emit("input", json)
+          context.emit("update:value", json)
           nextTick(() => {
             state.internalChange = false
           })
         }
       }
-      options.onChange && options.onChange(...arguments)
+      props.options.onChange && props.options.onChange(...arguments)
     }
     const initView = () => {
       if (!state.editor) {
         const container = jsoneditor.value
-          // })
-        // let cacheChange = options.onChange
-        // // delete options.onChange
-        // const options = Object.assign(options, {
-        //   onChange: onChange
+        let cacheChange = props.options.onChange
+        delete props.options.onChange
+        const options = Object.assign(props.options, {
+          onChange: onChange
+        })
         console.log(container, 'sssss');
         state.editor = new JSONEditor(container, props.options)
-        // options.onChange = cacheChange
+        props.options.onChange = cacheChange
       }
       console.log(props.value , 'value');
       state.editor.set(props.value || {})
@@ -86,10 +86,11 @@ export default  defineComponent({
       }
     }
     watch(()=>props.value,(newValue, oldValue)=>{
-      if (state.editor && value && !state.internalChange) {
-        state.editor.set(value)
+      if (state.editor && newValue && !state.internalChange) {
+        state.editor.set(newValue)
       }
-    },{
+    },
+    {
       immediate: true,
       deep: true
     })
@@ -97,7 +98,8 @@ export default  defineComponent({
       nextTick(()=>{
         initView()
       })
-    },{
+    },
+    {
       immediate: true
     })
 
