@@ -33,32 +33,62 @@ export default defineComponent({
     const state = reactive({
       list: [
         {
-          id: "24",
+          id: "1",
           title: "编号3",
           state: 0
         },
         {
-          id: "23",
+          id: "2",
           title: "编号4",
           state: 1
         },
         {
-          id: "23",
+          id: "3",
           title: "编号5",
           state: 2
         },
         {
-          id: "2",
+          id: "4",
           title: "编号3",
           state: 0
         },
         {
-          id: "223",
+          id: "5",
           title: "编号3",
           state: 1
         },
         {
-          id: "2444",
+          id: "6",
+          title: "编号3",
+          state: 1
+        },
+        {
+          id: "7",
+          title: "编号3",
+          state: 0
+        },
+        {
+          id: "8",
+          title: "编号4",
+          state: 1
+        },
+        {
+          id: "9",
+          title: "编号5",
+          state: 2
+        },
+        {
+          id: "10",
+          title: "编号3",
+          state: 0
+        },
+        {
+          id: "11",
+          title: "编号3",
+          state: 1
+        },
+        {
+          id: "12",
           title: "编号3",
           state: 1
         }
@@ -73,12 +103,14 @@ export default defineComponent({
         {
           prop: "id",
           label: "编号",
-          align: "center"
+          align: "center",
+          width: "80px"
         },
         {
           prop: "title",
           label: "标题",
           align: "center",
+          width: "200px",
           formatter: row => {
             return `<span style="white-space: nowrap;color: dodgerblue;">${row.title}</span>`;
           }
@@ -87,6 +119,7 @@ export default defineComponent({
           prop: "state",
           label: "状态",
           align: "center",
+          width: "200px",
           render: (row, column) => {
             return `<el-tag type="success">${row[column.prop]}</el-tag>`;
           }
