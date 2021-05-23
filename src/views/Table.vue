@@ -79,7 +79,8 @@ export default defineComponent({
           prop: "title",
           label: "标题",
           align: "center",
-          formatter: row => {
+          formatter: (row, column) => {
+            console.log(row, column);
             return `<span style="white-space: nowrap;color: dodgerblue;">${row.title}</span>`;
           }
         },

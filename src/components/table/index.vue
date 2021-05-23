@@ -10,6 +10,9 @@
     <!--region 选择框-->
     <el-table-column v-if="options.mutiSelect" type="selection" align="center" style="width: 65px;">
     </el-table-column>
+    <!---seq 序列号--->
+    <el-table-column v-if="options.mutiSelect" label="序号" type="index" align="center" style="width: 65px;">
+    </el-table-column>
     <!--endregion-->
     <!--region 数据列-->
     <template v-for="(column, index) in columns" :key="column.label">
