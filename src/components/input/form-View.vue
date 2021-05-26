@@ -25,12 +25,12 @@
 </template>
 <script>
 import { defineComponent } from 'vue'
-import componentView from './componentView.vue'
+import ComponentView from './component-View.vue'
 
 export default  defineComponent({
   name: 'formView',
   components: {
-    componentView,
+    ComponentView,
   },
   props: {
     columnList: {

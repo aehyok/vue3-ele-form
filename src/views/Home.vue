@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <el-form :model="formConfig.formData" label-width="120px" :ref="dom">
-          <FormView
+          <form-view
             :columnList="formConfig.formListItem"
             :formData="formConfig.formData"
             :columnSpan="formConfig.cols"
@@ -34,7 +34,7 @@
 </template>
 <script>
 import { defineComponent, reactive, toRefs, ref } from "@vue/runtime-core";
-import FormView from "../components/input/formView.vue";
+import FormView from "../components/input/form-View.vue";
 import VueJsonEditor from '../components/json/VueJsonEditor.vue'
 
 export default defineComponent({

@@ -133,7 +133,6 @@ export default defineComponent({
   },
   setup(props, context) {
     // props: ["list", "columns", "operates", "options"];
-    console.log(context.emit, "sssssssssss----sssssss");
     const state = reactive({
       pageIndex: 1,
       multipleSelection: [] // 多行选中
