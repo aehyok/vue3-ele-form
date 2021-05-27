@@ -34,8 +34,8 @@
 </template>
 <script>
 import { defineComponent, reactive, toRefs, ref } from "@vue/runtime-core";
-import FormView from "../components/input/form-View.vue";
-import VueJsonEditor from '../components/json/VueJsonEditor.vue'
+import FormView from "../components/input/form-view.vue";
+import VueJsonEditor from '../components/json/vue-json-editor.vue'
 
 export default defineComponent({
   components: {

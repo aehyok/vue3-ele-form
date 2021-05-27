@@ -23,16 +23,16 @@
 </template>
 <script>
 import { createApp, defineComponent } from 'vue'
-import TextView from '@/components/input/item/text-View.vue'
-import TextareaView from '@/components/input/item/textarea-View.vue'
-import NumberView from '@/components/input/item/number-View.vue'
-import DateView from '@/components/input/item/date-View.vue'
-import SwitchView from '@/components/input/item/switch-View.vue'
-import RadioView from '@/components/input/item/radio-View.vue'
-import CheckboxView from '@/components/input/item/checkbox-View.vue'
-import DaterangeView from '@/components/input/item/daterange-View.vue'
-import SelectView from '@/components/input/item/select-View.vue'
-import ImageView from '@/components/input/item/image-View.vue'
+import TextView from '@/components/input/item/text-view.vue'
+import TextareaView from '@/components/input/item/textarea-view.vue'
+import NumberView from '@/components/input/item/number-view.vue'
+import DateView from '@/components/input/item/date-view.vue'
+import SwitchView from '@/components/input/item/switch-view.vue'
+import RadioView from '@/components/input/item/radio-view.vue'
+import CheckboxView from '@/components/input/item/checkbox-view.vue'
+import DaterangeView from '@/components/input/item/daterange-view.vue'
+import SelectView from '@/components/input/item/select-view.vue'
+import ImageView from '@/components/input/item/image-view.vue'
 
 export default  defineComponent({
   name: 'formView',

@@ -25,7 +25,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue'
-import ComponentView from './component-View.vue'
+import ComponentView from './component-view.vue'
 
 export default  defineComponent({
   name: 'formView',
