@@ -10,7 +10,7 @@ import JSONEditor from "jsoneditor/dist/jsoneditor.min.js"
 import 'jsoneditor/dist/jsoneditor.min.css'
 import { defineComponent, onMounted, onUnmounted, watch,reactive, nextTick, computed ,ref, toRefs } from 'vue';
 export default  defineComponent({
-  name: "VueJsonExditor",
+  name: "VueJsonEditor",
   props: {
     options: {
       type: Object,
@@ -84,7 +84,7 @@ export default  defineComponent({
         state.editor.destroy()
         state.editor = null
       }
-    }
+    } 
     watch(()=>props.value,(newValue, oldValue)=>{
       if (state.editor && newValue && !state.internalChange) {
         state.editor.set(newValue)
