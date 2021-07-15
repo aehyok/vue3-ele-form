@@ -3,6 +3,7 @@
   <el-table
     v-loading.iTable="options.loading"
     :data="list"
+    :highlight-current-row ="options.highlightCurrentRow"
     :stripe="options.stripe"
     ref="mutipleTable"
     @selection-change="handleSelectionChange"
@@ -136,8 +137,8 @@ export default defineComponent({
     options: {
       type: Object,
       default: () => {
-        //  stripe: false // 是否为斑马纹 table
-        //  highlightCurrentRow: false // 是否要高亮当前行
+         stripe: false // 是否为斑马纹 table
+         highlightCurrentRow: false // 是否要高亮当前行
       }
     } // table 表格的控制参数
   },
