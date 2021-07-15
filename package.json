@@ -1,6 +1,6 @@
 {
   "name": "aehyok-form-vue3",
-  "version": "1.0.36",
+  "version": "1.0.38",
   "main": "lib/aehyok-form.umd.min.js",
   "author": "aehyok@163.com",
   "description": "A vue component for dynamic Form Table",
@@ -42,6 +42,10 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.2.0",
     "url-loader": "^4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aehyok/vue3-ele-form.git"
   },
   "license": "MIT",
   "browserslist": [
