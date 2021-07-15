@@ -6,6 +6,8 @@
       :options="options"
       :columns="columns"
       :operates="operates"
+      v-model:pageModel="pageModel"
+      @search="search"
     >
     </sl-table>
   </div>
@@ -18,7 +20,7 @@ export default defineComponent({
   setup() {
     // 选中行
     const handleSelectionChange = val => {
-      console.log("val:", val);
+      console.log("handleSelectionChange-val:", val);
     };
     // 编辑
     const handleEdit = (index, row, idx) => {
@@ -30,7 +32,13 @@ export default defineComponent({
       console.log(" index:", index);
       console.log(" row:", row);
     };
+    
     const state = reactive({
+      pageModel: {
+        page: 1,
+        limit: 10,
+        total: 17,
+      },
       list: [
         {
           id: "24",
@@ -136,11 +144,17 @@ export default defineComponent({
         ]
       } // 列操作按钮
     });
+
+    const search = () => {
+      state.list = [...state.list]
+      console.log(state.pageModel, 'state.pageModel')
+    }
     return {
       ...toRefs(state),
       handleSelectionChange,
       handleEdit,
-      handleDel
+      handleDel,
+      search,
     };
   }
 });

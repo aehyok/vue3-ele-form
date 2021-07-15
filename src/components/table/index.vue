@@ -75,14 +75,48 @@
     </el-table-column>
     <!--endregion-->
   </el-table>
+  <page-setting      
+    v-model:page="pageModel.page"
+    v-model:limit="pageModel.limit"
+    v-model:total="pageModel.total"
+    @pageChange="pageChange"/>
 </template>
 <!--endregion-->
 <script>
 import { defineComponent, reactive, toRefs } from "vue";
-
+import PageSetting from './page-setting.vue'
 export default defineComponent({
   name: "SlTable",
+  // 自定义显示内容组件
+  components: {
+    PageSetting,
+    expandDom: {
+      functional: true,
+      props: ["row", "render", "index", "column"],
+      // props: {
+      //   row: Object,
+      //   render: Function,
+      //   index: Number,
+      //   column: {
+      //     type: Object,
+      //     default: null
+      //   }
+      // },
+      render: (h, ctx) => {
+        // const params = {
+        //   row: ctx.props.row,
+        //   index: ctx.props.index
+        // };
+        // if (ctx.props.column) params.column = ctx.props.column;
+        // return ctx.props.render(h, params);
+      }
+    }
+  },
   props: {
+    pageModel:{
+      type: Object,
+      default: () => {}
+    },
     // 数据列表
     list: {
       type: Array,
@@ -107,32 +141,7 @@ export default defineComponent({
       }
     } // table 表格的控制参数
   },
-  // 自定义显示内容组件
-  components: {
-    expandDom: {
-      functional: true,
-      props: ["row", "render", "index", "column"],
-      // props: {
-      //   row: Object,
-      //   render: Function,
-      //   index: Number,
-      //   column: {
-      //     type: Object,
-      //     default: null
-      //   }
-      // },
-      render: (h, ctx) => {
-        // const params = {
-        //   row: ctx.props.row,
-        //   index: ctx.props.index
-        // };
-        // if (ctx.props.column) params.column = ctx.props.column;
-        // return ctx.props.render(h, params);
-      }
-    }
-  },
-  setup(props, context) {
-    // props: ["list", "columns", "operates", "options"];
+  setup(props, { emit }) {
     const state = reactive({
       pageIndex: 1,
       multipleSelection: [] // 多行选中
@@ -142,17 +151,25 @@ export default defineComponent({
     const handleSelectionChange = val => {
       console.log(val, "val");
       state.multipleSelection = val;
-      context.emit("handleSelectionChange", val);
+      emit("handleSelectionChange", val);
     };
+
     // 显示 表格操作弹窗
     const showActionTableDialog = () => {
       console.log(4444);
-      context.emit("handelAction");
+      emit("handelAction");
     };
+
+    const pageChange = () => {
+      console.log('pageChange',props.pageModel)
+      emit('search')
+    }
+
     return {
       ...toRefs(state),
       handleSelectionChange,
-      showActionTableDialog
+      showActionTableDialog,
+      pageChange
     };
   }
 });
