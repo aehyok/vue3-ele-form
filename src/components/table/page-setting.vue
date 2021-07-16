@@ -65,7 +65,6 @@
           return props.page;
         },
         set(val) {
-          console.log(val, "page");
           emit("update:page", val);
         },
       });
@@ -74,7 +73,6 @@
           return props.limit;
         },
         set(val) {
-          console.log(val, "limit");
           emit("update:limit", val);
         },
       });
@@ -85,7 +83,6 @@
         // }
       };
       const handleCurrentChange = (val) => {
-        console.log("changePage", val);
         emit("pageChange");
         // if (props.autoScroll) {
         //   scrollTo(0, 800);

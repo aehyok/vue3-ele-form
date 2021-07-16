@@ -150,19 +150,16 @@ export default defineComponent({
 
     // 多行选中
     const handleSelectionChange = val => {
-      console.log(val, "val");
       state.multipleSelection = val;
       emit("handleSelectionChange", val);
     };
 
     // 显示 表格操作弹窗
     const showActionTableDialog = () => {
-      console.log(4444);
       emit("handelAction");
     };
 
     const pageChange = () => {
-      console.log('pageChange',props.pageModel)
       emit('search')
     }
 
