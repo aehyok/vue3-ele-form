@@ -3,7 +3,6 @@
     <sl-table
       :list="list"
       @handleSelectionChange="handleSelectionChange"
-      :options="options"
       :columns="columns"
       :operates="operates"
       v-model:pageModel="pageModel"
@@ -15,7 +14,7 @@
 <script>
 import slTable from "@/components/table";
 import { defineComponent, reactive, toRefs } from "vue";
-import { list, columns } from './tableConfig'
+import { list, columns_test } from './tableConfig'
 export default defineComponent({
   components: { slTable },
   setup() {
@@ -41,12 +40,6 @@ export default defineComponent({
         total: 17,
       },
       list:[], // table数据
-      options: {
-        stripe: true, // 是否为斑马纹 table
-        loading: false, // 是否添加表格loading加载动画
-        highlightCurrentRow: true, // 是否支持当前行高亮显示
-        mutiSelect: true // 是否支持列表项选中功能
-      }, // table 的参数
       columns: [], // 需要展示的列
       operates: {
         width: 200,
@@ -79,7 +72,7 @@ export default defineComponent({
     });
 
     state.list = list
-    state.columns = columns
+    state.columns = columns_test
     const search = () => {
       state.list = [...state.list]
       console.log(state.pageModel, 'state.pageModel')

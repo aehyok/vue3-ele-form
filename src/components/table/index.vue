@@ -9,14 +9,14 @@
     @selection-change="handleSelectionChange"
   >
     <!--region 选择框-->
-    <el-table-column v-if="options.mutiSelect" type="selection" align="center" style="width: 65px;">
+    <el-table-column v-if="isCheckBox" type="selection" align="center" style="width: 65px;">
     </el-table-column>
     <!---seq 序列号--->
-    <el-table-column v-if="options.mutiSelect" label="序号" type="index" align="center" style="width: 65px;">
+    <el-table-column v-if="isIndex" label="序号" type="index" align="center" style="width: 65px;">
     </el-table-column>
     <!--endregion-->
     <!--region 数据列-->
-    <template v-for="(column, index) in columns" :key="column.label">
+    <template v-for="(column, index) in normalColumns" :key="column.label">
       <el-table-column
         :prop="column.prop"
         :label="column.label"
@@ -84,7 +84,7 @@
 </template>
 <!--endregion-->
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
+import { computed, defineComponent, reactive, toRefs } from "vue";
 import PageSetting from './page-setting.vue'
 export default defineComponent({
   name: "SlTable",
@@ -137,8 +137,10 @@ export default defineComponent({
     options: {
       type: Object,
       default: () => {
-         stripe: false // 是否为斑马纹 table
-         highlightCurrentRow: false // 是否要高亮当前行
+         return {
+          stripe: true, // 是否为斑马纹 table
+         highlightCurrentRow: true // 是否要高亮当前行
+         }
       }
     } // table 表格的控制参数
   },
@@ -159,6 +161,20 @@ export default defineComponent({
       emit("handelAction");
     };
 
+    // 判断是否展示多选框
+    const isCheckBox = computed(() => {
+      console.log(props.columns.some(item => item.type === 'index'), '是否显示check')
+      return props.columns.some(item => item.type === 'checkbox')
+    })
+
+    // 判断是否展示多选框
+    const isIndex = computed(() => {
+      console.log(props.columns.some(item => item.type === 'index'), '是否显示index')
+      return props.columns.some(item => item.type === 'index')
+    })
+
+    const normalColumns = props.columns.filter(item =>(!item.type || !["checkbox","index"].includes(item.type)) )
+    console.log(props.columns,normalColumns, '--------normalColumns-----------')
     const pageChange = () => {
       emit('search')
     }
@@ -167,7 +183,10 @@ export default defineComponent({
       ...toRefs(state),
       handleSelectionChange,
       showActionTableDialog,
-      pageChange
+      pageChange,
+      isCheckBox,
+      isIndex,
+      normalColumns
     };
   }
 });

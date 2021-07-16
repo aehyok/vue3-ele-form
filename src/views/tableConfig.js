@@ -38,20 +38,20 @@ const list =
     }
 ]
 
-const columns = [
+const columns_test = [
+    {
+        type:'checkbox',
+      },
     {
       prop: "id",
       label: "编号",
+      type:'index',
       align: "center"
     },
     {
       prop: "title",
       label: "标题",
       align: "center",
-      formatter: (row, column) => {
-        console.log(row, column);
-        return `<span style="white-space: nowrap;color: dodgerblue;">${row.title}</span>`;
-      }
     },
     {
       prop: "state",
@@ -76,5 +76,5 @@ const columns = [
   ]
 export {
     list,
-    columns
+    columns_test
 }
