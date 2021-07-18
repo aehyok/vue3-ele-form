@@ -1,6 +1,6 @@
 {
   "name": "aehyok-form-vue3",
-  "version": "1.0.46",
+  "version": "1.0.47",
   "main": "lib/aehyok-form.umd.min.js",
   "author": "aehyok@163.com",
   "description": "A vue component for dynamic Form Table",

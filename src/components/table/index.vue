@@ -6,6 +6,7 @@
     :highlight-current-row ="options.highlightCurrentRow"
     :stripe="options.stripe"
     ref="mutipleTable"
+    :height="height"
     @selection-change="handleSelectionChange"
   >
     <!--region 选择框-->
@@ -122,6 +123,10 @@ export default defineComponent({
     list: {
       type: Array,
       default: () => []
+    },
+    height: {
+      type: String,
+      default:{}
     },
     /*
       需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽

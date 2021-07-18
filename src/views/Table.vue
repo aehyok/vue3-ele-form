@@ -5,6 +5,7 @@
       @handleSelectionChange="handleSelectionChange"
       :columns="columns"
       :operates="operates"
+      :height="height"
       v-model:pageModel="pageModel"
       @search="search"
     >
@@ -37,8 +38,9 @@ export default defineComponent({
       pageModel: {
         page: 1,
         limit: 10,
-        total: 17,
+        total: 7,
       },
+      height:"500px",
       list:[], // table数据
       columns: [], // 需要展示的列
       operates: {

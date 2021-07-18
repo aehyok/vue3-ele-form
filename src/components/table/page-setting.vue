@@ -34,7 +34,7 @@
       },
       hideonsinglepage: {
         type: Boolean,
-        default: false,
+        default: true,
       },
       pageSizes: {
         type: Array,
