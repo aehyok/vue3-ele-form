@@ -54,7 +54,7 @@
       align="center"
       :width="operates.width"
       :fixed="operates.fixed"
-      v-if="operates.list.filter(_x => _x.show === true).length > 0"
+      v-if="Object.keys(operates).length > 0 && operates.list.filter(_x => _x.show === true).length > 0"
     >
       <template #default="scope">
         <div class="operate-group">
@@ -138,7 +138,13 @@ export default defineComponent({
     /*
       操作按钮组 === label: 文本，type :类型（primary / success / warning / danger / info / text），show：是否显示，icon：按钮图标，plain：是否朴素按钮，disabled：是否禁用，method：回调方法
      */
-    operates: {},
+    operates: {
+      type: Object,
+      default: () => {
+         return {
+         }
+      }
+    },
     options: {
       type: Object,
       default: () => {
