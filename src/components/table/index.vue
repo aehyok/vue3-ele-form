@@ -168,14 +168,16 @@ export default defineComponent({
 
     // 判断是否展示多选框
     const isCheckBox = computed(() => {
-      console.log(props.columns.some(item => item.type === 'index'), '是否显示check')
-      return props.columns.some(item => item.type === 'checkbox')
+      const isBool = props.columns.some(item => item.type === 'checkbox')
+      console.log(isBool, '是否显示check')
+      return isBool
     })
 
     // 判断是否展示多选框
     const isIndex = computed(() => {
-      console.log(props.columns.some(item => item.type === 'index'), '是否显示index')
-      return props.columns.some(item => item.type === 'index')
+      const isBool = props.columns.some(item => item.type === 'index')
+      console.log(isBool, '是否显示index')
+      return isBool
     })
 
     const normalColumns = props.columns.filter(item =>(!item.type || !["checkbox","index"].includes(item.type)) )

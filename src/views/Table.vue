@@ -40,7 +40,7 @@ export default defineComponent({
         limit: 10,
         total: 7,
       },
-      height:"500px",
+      // height:"500px",
       list:[], // table数据
       columns: [], // 需要展示的列
       operates: {

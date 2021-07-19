@@ -1,6 +1,6 @@
 # aehyok-form-vue3
 
-A vue component for dynamic form create.
+A vue component for dynamic form create、dynamic table .
 
 - 本项目适合 Vue3 ElementUI 下进行使用的，目前基础功能已经具备。
 
