@@ -3,17 +3,29 @@
   <el-table
     v-loading.iTable="options.loading"
     :data="list"
-    :highlight-current-row ="options.highlightCurrentRow"
+    :highlight-current-row="options.highlightCurrentRow"
     :stripe="options.stripe"
     ref="mutipleTable"
-    :height="height"
+    :header-cell-style="{ background: '#EEF4FF' }"
     @selection-change="handleSelectionChange"
+    @current-change="handleCurrentChange"
   >
     <!--region 选择框-->
-    <el-table-column v-if="isCheckBox" type="selection" align="center" style="width: 65px;">
+    <el-table-column
+      v-if="isCheckBox"
+      type="selection"
+      align="center"
+      style="width: 65px"
+    >
     </el-table-column>
     <!---seq 序列号--->
-    <el-table-column v-if="isIndex" label="序号" type="index" align="center" style="width: 65px;">
+    <el-table-column
+      v-if="isIndex"
+      label="序号"
+      type="index"
+      align="center"
+      style="width: 65px"
+    >
     </el-table-column>
     <!--endregion-->
     <!--region 数据列-->
@@ -36,12 +48,6 @@
           </template>
           <template v-else>
             <el-tag type="success">{{ scope.row[column.prop] }}</el-tag>
-            <!-- <expand-dom
-              :column="column"
-              :row="scope.row"
-              :render="column.render"
-              :index="index"
-            ></expand-dom> -->
           </template>
         </template>
       </el-table-column>
@@ -54,7 +60,10 @@
       align="center"
       :width="operates.width"
       :fixed="operates.fixed"
-      v-if="Object.keys(operates).length > 0 && operates.list.filter(_x => _x.show === true).length > 0"
+      v-if="
+        Object.keys(operates).length &&
+        operates.list.filter((_x) => _x.show).length
+      "
     >
       <template #default="scope">
         <div class="operate-group">
@@ -77,11 +86,12 @@
     </el-table-column>
     <!--endregion-->
   </el-table>
-  <page-setting      
+  <page-setting
     v-model:page="pageModel.page"
     v-model:limit="pageModel.limit"
     v-model:total="pageModel.total"
-    @pageChange="pageChange"/>
+    @pageChange="pageChange"
+  />
 </template>
 <!--endregion-->
 <script>
@@ -115,18 +125,20 @@ export default defineComponent({
     }
   },
   props: {
-    pageModel:{
+    pageModel: {
       type: Object,
-      default: () => {}
+      default: () => { }
+    },
+    height: {
+      type: String,
+      default: () => {
+
+      }
     },
     // 数据列表
     list: {
       type: Array,
       default: () => []
-    },
-    height: {
-      type: String,
-      default:{}
     },
     /*
       需要展示的列 === prop：列数据对应的属性，label：列名，align：对齐方式，width：列宽
@@ -138,23 +150,18 @@ export default defineComponent({
     /*
       操作按钮组 === label: 文本，type :类型（primary / success / warning / danger / info / text），show：是否显示，icon：按钮图标，plain：是否朴素按钮，disabled：是否禁用，method：回调方法
      */
-    operates: {
-      type: Object,
-      default: () => {
-         return {
-         }
-      }
-    },
+    operates: {},
     options: {
       type: Object,
       default: () => {
-         return {
+        return {
           stripe: true, // 是否为斑马纹 table
-         highlightCurrentRow: true // 是否要高亮当前行
-         }
+          highlightCurrentRow: true // 是否要高亮当前行
+        }
       }
     } // table 表格的控制参数
   },
+  emits: ["search", "handleCurrentChange"],
   setup(props, { emit }) {
     const state = reactive({
       pageIndex: 1,
@@ -163,10 +170,13 @@ export default defineComponent({
 
     // 多行选中
     const handleSelectionChange = val => {
-      state.multipleSelection = val;
       emit("handleSelectionChange", val);
     };
 
+    const handleCurrentChange = val => {
+      console.log(val, 'handleCurrentChange')
+      emit("handleCurrentChange", val)
+    }
     // 显示 表格操作弹窗
     const showActionTableDialog = () => {
       emit("handelAction");
@@ -174,20 +184,18 @@ export default defineComponent({
 
     // 判断是否展示多选框
     const isCheckBox = computed(() => {
-      const isBool = props.columns.some(item => item.type === 'checkbox')
-      console.log(isBool, '是否显示check')
-      return isBool
+      console.log(props.columns.some(item => item.type === 'index'), '是否显示check')
+      return props.columns.some(item => item.type === 'checkbox')
     })
 
     // 判断是否展示多选框
     const isIndex = computed(() => {
-      const isBool = props.columns.some(item => item.type === 'index')
-      console.log(isBool, '是否显示index')
-      return isBool
+      console.log(props.columns.some(item => item.type === 'index'), '是否显示index')
+      return props.columns.some(item => item.type === 'index')
     })
 
-    const normalColumns = props.columns.filter(item =>(!item.type || !["checkbox","index"].includes(item.type)) )
-    console.log(props.columns,normalColumns, '--------normalColumns-----------')
+    const normalColumns = props.columns.filter(item => (!item.type || !["checkbox", "index"].includes(item.type)))
+    console.log(props.columns, normalColumns, '--------normalColumns-----------')
     const pageChange = () => {
       emit('search')
     }
@@ -195,6 +203,7 @@ export default defineComponent({
     return {
       ...toRefs(state),
       handleSelectionChange,
+      handleCurrentChange,
       showActionTableDialog,
       pageChange,
       isCheckBox,
