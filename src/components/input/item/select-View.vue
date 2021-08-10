@@ -28,10 +28,16 @@ export default defineComponent({
   },
   setup(props, context) {
     const { column } = props
-    let { codeTable } = props.column.codeTable
-
+    let { codeTable } = props.column
+    const state = reactive({
+      list: []
+    })
     if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
-      codeTable = 'type'
+      // codeTable = 'type'
+      state.list = codeTable
+      console.log(state.list , 'codeTable')
+    } else if( typeof codeTable === 'string' ) {
+      getList(codeTable)
     }
     const rules = [
       {
@@ -44,19 +50,15 @@ export default defineComponent({
         return props.data
       },
       set: function(val) {
-        // props.data = val
         context.emit('update:data', val)
       },
     })
-    const state = reactive({
-      list: []
-    })
+    
     const getList = (type) => {
       getContentTypeList(type).then( res => {
         state.list = res.data
       })
     }
-    getList(codeTable)
 
     return {
       ...toRefs(state),

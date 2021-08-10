@@ -58,10 +58,55 @@ export default defineComponent({
         cols: 24,
         formListItem: [
           {
+            name: "staticData",
+            type: "static",
+            title: "社区/村：",
+          },
+          {
+            name: "creType",
+            type: "select",
+            title: "地块类型：",
+            required: true,
+            codeTable: [
+              { id:"1", text: "耕地"},
+              { id:"2", text: "宅基地"},
+              { id:"3", text: "自留地"},
+              { id:"4", text: "林地"},
+            ],
+          },
+          {
+            type: "TextSelect",
+            title: "地块面积：",
+            text: {
+              name: "area",
+            },
+            select: {
+              name: "unit",
+            }
+          },
+          {
+            name: "creType1",
+            type: "select",
+            // multiple: true,
+            codeTable: [
+              { id:"1", text: "耕地"},
+              { id:"2", text: "宅基地"},
+              { id:"3", text: "自留地"},
+              { id:"4", text: "林地"},
+            ],
+            title: "地块所属：",
+            required: true
+          },
+          {
             name: "name1",
             type: "text",
-            title: "栏目标题",
+            title: "地块名称：",
             required: true // 必填
+          },
+          {
+            name: "descript",
+            type: "textarea",
+            title: "备注",
           },
           {
             name: "name",
@@ -78,12 +123,6 @@ export default defineComponent({
             name: "count",
             type: "number",
             title: "浏览数量"
-          },
-          {
-            name: "descript",
-            type: "textarea",
-            title: "备注",
-            required: true
           },
           {
             name: "content",
@@ -173,7 +212,12 @@ export default defineComponent({
             name: "creType",
             type: "select",
             // multiple: true,
-            codeTable: "politicalstatus",
+            codeTable: [
+              { id:1, text: "耕地"},
+              { id:2, text: "宅基地"},
+              { id:3, text: "自留地"},
+              { id:4, text: "林地"},
+            ],
             title: "证件类型"
           },
           {
@@ -183,6 +227,7 @@ export default defineComponent({
           }
         ],
         formData: {
+          staticData: '测试数据组合',
           name: "主菜单栏目",
           total: null,
           count: null,
