@@ -35,6 +35,8 @@ import SelectView from '@/components/input/item/select-view.vue'
 import ImageView from '@/components/input/item/image-view.vue'
 import StaticView from '@/components/input/item/static-view.vue'
 
+// 组合式录入控件
+import TextSelectView from '@/components/input/compose/text-select-view.vue'
 export default  defineComponent({
   name: 'formView',
   components: {
@@ -48,7 +50,8 @@ export default  defineComponent({
     CheckboxView,
     SelectView,
     ImageView,
-    StaticView
+    StaticView,
+    TextSelectView,
   },
   props: {
     column: {
