@@ -33,6 +33,7 @@ import CheckboxView from '@/components/input/item/checkbox-view.vue'
 import DaterangeView from '@/components/input/item/daterange-view.vue'
 import SelectView from '@/components/input/item/select-view.vue'
 import ImageView from '@/components/input/item/image-view.vue'
+import StaticView from '@/components/input/item/static-view.vue'
 
 export default  defineComponent({
   name: 'formView',
@@ -47,6 +48,7 @@ export default  defineComponent({
     CheckboxView,
     SelectView,
     ImageView,
+    StaticView
   },
   props: {
     column: {
