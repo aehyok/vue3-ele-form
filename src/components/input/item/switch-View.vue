@@ -4,10 +4,10 @@
     <el-switch v-model="value"></el-switch>
   </el-form-item>
 </template>
-<script>
-import { defineComponent , computed } from 'vue'
-export default defineComponent({
-  props: {
+<script setup>
+import { computed } from 'vue'
+  const emits = defineEmits(["update:data"])
+  const props = defineProps({
     column: {
       type: [Object],
       default: () => {},
@@ -16,28 +16,21 @@ export default defineComponent({
       type: Boolean,
       default: undefined, // 只有true和false两个值
     },
-  },
-  setup(props, context) {
-    const { column }  = props
-    const rules = [
-      {
-        required: column.required,
-        message: `请输入${column.title}`,
-      },
-    ]
-    const value =computed ({
-      get: function() {
-        return props.data
-      },
-      set: function(val) {
-        // props.data = val
-        context.emit('update:data', val)
-      },
-    })
-    return {
-      rules,
-      value,
-    }
-  },
-})
+  })
+
+  const { column }  = props
+  const rules = [
+    {
+      required: column.required,
+      message: `请输入${column.title}`,
+    },
+  ]
+  const value =computed ({
+    get: function() {
+      return props.data
+    },
+    set: function(val) {
+      emits('update:data', val)
+    },
+  })
 </script>

@@ -2,18 +2,18 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-form :model="formConfig.formData" label-width="120px" :ref="dom">
+        <el-form :model="state.formConfig.formData" label-width="120px" :ref="dom">
           <form-view
-            :columnList="formConfig.formListItem"
-            :formData="formConfig.formData"
-            :columnSpan="formConfig.cols"
+            :columnList="state.formConfig.formListItem"
+            :formData="state.formConfig.formData"
+            :columnSpan="state.formConfig.cols"
           />
         </el-form>
       </el-col>
       <el-col :span="12">
         <vue-json-editor
-          v-model:value="formConfig"
-          :options="options"
+          v-model:value="state.formConfig"
+          :options="state.options"
           :plus="false"
           height="800px"
         />
@@ -32,232 +32,219 @@
     </el-row>
   </div>
 </template>
-<script>
-import { defineComponent, reactive, toRefs, ref } from "vue";
+<script setup>
+import {reactive, toRefs, ref } from "vue";
 import FormView from "../components/input/form-view.vue";
 import VueJsonEditor from '../components/json/vue-json-editor.vue'
 
-export default defineComponent({
-  components: {
-    FormView,
-    VueJsonEditor
-  },
-  setup() {
-    let refs = ref("");
-    const dom = el => {
-      refs = el;
-    };
+  let refs = ref("");
+  const dom = el => {
+    refs = el;
+  };
 
-    const state = reactive({
-      options: {
-        mode: "code",
-        mainMenuBar: false
-      },
-      show: true,
-      formConfig: {
-        cols: 24,
-        formListItem: [
-          {
-            name: "staticData",
-            type: "static",
-            title: "社区/村：",
+  const state = reactive({
+    options: {
+      mode: "code",
+      mainMenuBar: false
+    },
+    show: true,
+    formConfig: {
+      cols: 24,
+      formListItem: [
+        {
+          name: "staticData",
+          type: "static",
+          title: "社区/村：",
+        },
+        {
+          name: "creType",
+          type: "select",
+          title: "地块类型：",
+          required: true,
+          codeTable: [
+            { id:"1", text: "耕地"},
+            { id:"2", text: "宅基地"},
+            { id:"3", text: "自留地"},
+            { id:"4", text: "林地"},
+          ],
+        },
+        {
+          type: "TextSelect",
+          title: "地块面积：",
+          text: {
+            name: "area",
           },
-          {
-            name: "creType",
-            type: "select",
-            title: "地块类型：",
-            required: true,
-            codeTable: [
-              { id:"1", text: "耕地"},
-              { id:"2", text: "宅基地"},
-              { id:"3", text: "自留地"},
-              { id:"4", text: "林地"},
-            ],
-          },
-          {
-            type: "TextSelect",
-            title: "地块面积：",
-            text: {
-              name: "area",
-            },
-            select: {
-              name: "unit",
-            }
-          },
-          {
-            name: "creType1",
-            type: "select",
-            // multiple: true,
-            codeTable: [
-              { id:"1", text: "耕地"},
-              { id:"2", text: "宅基地"},
-              { id:"3", text: "自留地"},
-              { id:"4", text: "林地"},
-            ],
-            title: "地块所属：",
-            required: true
-          },
-          {
-            name: "name1",
-            type: "text",
-            title: "地块名称：",
-            required: true // 必填
-          },
-          {
-            name: "descript",
-            type: "textarea",
-            title: "备注",
-          },
-          {
-            name: "name",
-            type: "text",
-            title: "栏目名称"
-          },
-          {
-            name: "total",
-            type: "number",
-            title: "栏目数量",
-            required: true
-          },
-          {
-            name: "count",
-            type: "number",
-            title: "浏览数量"
-          },
-          {
-            name: "content",
-            type: "textarea",
-            title: "内容"
-          },
-          {
-            name: "startDate",
-            type: "date",
-            title: "开始日期",
-            required: true
-          },
-          {
-            name: "endDate",
-            type: "date",
-            title: "结束日期"
-          },
-          {
-            name: "isValid",
-            type: "switch",
-            title: "是否有效"
-          },
-          {
-            name: "isExpired",
-            type: "switch",
-            title: "是否过期",
-            required: true
-          },
-          {
-            name: "type",
-            type: "radio",
-            codeTable: "type",
-            title: "栏目类型",
-            controls: [
-              {
-                value: 1,
-                showCondition: [
-                  {
-                    name: "show",
-                    type: "radio",
-                    codeTable: [
-                      { id: 1, text: "China" },
-                      { id: 2, text: "English" }
-                    ],
-                    title: "测试类型",
-                    required: true
-                  },
-                  {
-                    name: "image1",
-                    type: "image",
-                    title: "文件"
-                  }
-                ]
-              },
-              {
-                value: 2,
-                showCondition: [
-                  {
-                    name: "isValids",
-                    type: "switch",
-                    title: "是否有效"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            name: "requireType",
-            type: "radio",
-            codeTable: "isp",
-            title: "图文类型",
-            required: true
-          },
-          {
-            name: "range",
-            type: "checkbox",
-            title: "发布范围",
-            codeTable: "isp",
-            required: true
-          },
-          {
-            name: "dateRange",
-            type: "daterange",
-            title: "日期范围"
-          },
-          {
-            name: "creType",
-            type: "select",
-            // multiple: true,
-            codeTable: [
-              { id:1, text: "耕地"},
-              { id:2, text: "宅基地"},
-              { id:3, text: "自留地"},
-              { id:4, text: "林地"},
-            ],
-            title: "证件类型"
-          },
-          {
-            name: "image",
-            type: "image",
-            title: "头像"
+          select: {
+            name: "unit",
           }
-        ],
-        formData: {
-          staticData: '测试数据组合',
-          name: "主菜单栏目",
-          total: null,
-          count: null,
-          createDate: 1606730360386,
-          type: 1,
-          requireType: undefined,
-          creType: "",
-          range: [],
-          isExpired: false,
-          isValid: true
+        },
+        {
+          name: "creType1",
+          type: "select",
+          // multiple: true,
+          codeTable: [
+            { id:"1", text: "耕地"},
+            { id:"2", text: "宅基地"},
+            { id:"3", text: "自留地"},
+            { id:"4", text: "林地"},
+          ],
+          title: "地块所属：",
+          required: true
+        },
+        {
+          name: "name1",
+          type: "text",
+          title: "地块名称：",
+          required: true // 必填
+        },
+        {
+          name: "descript",
+          type: "textarea",
+          title: "备注",
+        },
+        {
+          name: "name",
+          type: "text",
+          title: "栏目名称"
+        },
+        {
+          name: "total",
+          type: "number",
+          title: "栏目数量",
+          required: true
+        },
+        {
+          name: "count",
+          type: "number",
+          title: "浏览数量"
+        },
+        {
+          name: "content",
+          type: "textarea",
+          title: "内容"
+        },
+        {
+          name: "startDate",
+          type: "date",
+          title: "开始日期",
+          required: true
+        },
+        {
+          name: "endDate",
+          type: "date",
+          title: "结束日期"
+        },
+        {
+          name: "isValid",
+          type: "switch",
+          title: "是否有效"
+        },
+        {
+          name: "isExpired",
+          type: "switch",
+          title: "是否过期",
+          required: true
+        },
+        {
+          name: "type",
+          type: "radio",
+          codeTable: "type",
+          title: "栏目类型",
+          controls: [
+            {
+              value: 1,
+              showCondition: [
+                {
+                  name: "show",
+                  type: "radio",
+                  codeTable: [
+                    { id: 1, text: "China" },
+                    { id: 2, text: "English" }
+                  ],
+                  title: "测试类型",
+                  required: true
+                },
+                {
+                  name: "image1",
+                  type: "image",
+                  title: "文件"
+                }
+              ]
+            },
+            {
+              value: 2,
+              showCondition: [
+                {
+                  name: "isValids",
+                  type: "switch",
+                  title: "是否有效"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: "requireType",
+          type: "radio",
+          codeTable: "isp",
+          title: "图文类型",
+          required: true
+        },
+        {
+          name: "range",
+          type: "checkbox",
+          title: "发布范围",
+          codeTable: "isp",
+          required: true
+        },
+        {
+          name: "dateRange",
+          type: "daterange",
+          title: "日期范围"
+        },
+        {
+          name: "creType",
+          type: "select",
+          // multiple: true,
+          codeTable: [
+            { id:1, text: "耕地"},
+            { id:2, text: "宅基地"},
+            { id:3, text: "自留地"},
+            { id:4, text: "林地"},
+          ],
+          title: "证件类型"
+        },
+        {
+          name: "image",
+          type: "image",
+          title: "头像"
         }
+      ],
+      formData: {
+        staticData: '测试数据组合',
+        name: "主菜单栏目",
+        total: null,
+        count: null,
+        createDate: 1606730360386,
+        type: 1,
+        requireType: undefined,
+        creType: "",
+        range: [],
+        isExpired: false,
+        isValid: true
       }
+    }
+  });
+  const submitForm = () => {
+    console.log(state.formConfig.formData, "formData");
+    refs.validate(valid => {
+      if (valid) {
+        console.log(valid, "this.valid");
+      } else {
+        console.log(valid, "验证失败");
+      }
+      return false;
     });
-    const submitForm = () => {
-      console.log(state.formConfig.formData, "formData");
-      refs.validate(valid => {
-        if (valid) {
-          console.log(valid, "this.valid");
-        } else {
-          console.log(valid, "验证失败");
-        }
-        return false;
-      });
-    };
-    return {
-      ...toRefs(state),
-      submitForm,
-      dom
-    };
-  }
-});
+  };
 </script>
 <style scoped></style>

@@ -2,17 +2,16 @@
 <template>
   <el-form-item :label="column.title" :prop="column.columnName">
     <el-checkbox-group v-model="value">
-      <el-checkbox v-for="item in list" :label="item.id" :key="item.id">{{
+      <el-checkbox v-for="item in state.list" :label="item.id" :key="item.id">{{
         item.text
       }}</el-checkbox>
     </el-checkbox-group>
   </el-form-item>
 </template>
-<script>
-import { defineComponent, computed, reactive, toRefs } from 'vue'
+<script setup>
+import { computed, reactive, toRefs } from 'vue'
 import { getContentTypeList } from '@/mock/api'
-export default defineComponent({
-  props: {
+  const props = defineProps({
     column: {
       type: [Object],
       default: () => {},
@@ -21,37 +20,32 @@ export default defineComponent({
       type: Array,
       default: () => [],
     },
-  },
-  setup(props, context){
+  })
+  let { codeTable } = props.column.codeTable
 
-    let { codeTable } = props.column.codeTable
-
-    if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
-      codeTable = 'type'
-    }
-    const value =computed ({
-      get: function() {
-        return props.data
-      },
-      set: function(val) {
-        // props.data = val
-        context.emit('update:data', val)
-      },
-    })
-
-    const state = reactive({
-      list: []
-    })
-    const getList = (type) => {
-      getContentTypeList(type).then( res => {
-        state.list = res.data
-      })
-    }
+  if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
+    // codeTable = 'type'
+    state.list = codeTable
+    console.log(state.list , 'codeTable')
+  } else if( typeof codeTable === 'string' ) {
     getList(codeTable)
-    return {
-      ...toRefs(state),
-      value
-    }
-  },
-})
+  }
+  const value =computed ({
+    get: function() {
+      return props.data
+    },
+    set: function(val) {
+      // props.data = val
+      context.emit('update:data', val)
+    },
+  })
+
+  const state = reactive({
+    list: []
+  })
+  const getList = (type) => {
+    getContentTypeList(type).then( res => {
+      state.list = res.data
+    })
+  }
 </script>

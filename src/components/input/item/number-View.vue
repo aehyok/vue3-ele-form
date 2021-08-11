@@ -30,8 +30,7 @@ export default {
         return props.data
       },
       set: function(val) {
-        // props.data = val
-        context.emit('update:data', val)
+        emit('update:data', val)
       },
     })
     return {

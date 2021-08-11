@@ -10,10 +10,10 @@
     </el-date-picker>
   </el-form-item>
 </template>
-<script>
-import { defineComponent, computed, reactive } from 'vue'
-export default defineComponent({
-  props: {
+<script setup>
+import { computed, reactive } from 'vue'
+  const emit = defineEmits(["update:data"])
+  const props = defineProps({
     column: {
       type: [Object],
       default: () => {},
@@ -22,31 +22,23 @@ export default defineComponent({
       type: String,
       default: '',
     },
-  },
-  setup(props, context){
-    const { column, data } = props
-    const state = reactive({
-      data: data
-    })
-    const rules = [
-      {
-        required: column.required,
-        message: `请输入${column.title}`,
-      },
-    ]
-    const value = computed ({
-      get: function() {
-        return props.data
-      },
-      set: function(val) {
-        // props.data = val
-        context.emit('update:data', val)
-      },
-    })
-    return {
-      rules,
-      value,
-    }
-  },
-})
+  })
+  const { column, data } = props
+  const state = reactive({
+    data: data
+  })
+  const rules = [
+    {
+      required: column.required,
+      message: `请输入${column.title}`,
+    },
+  ]
+  const value = computed ({
+    get: function() {
+      return props.data
+    },
+    set: function(val) {
+      emit('update:data', val)
+    },
+  })
 </script>

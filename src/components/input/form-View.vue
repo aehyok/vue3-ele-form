@@ -23,32 +23,22 @@
     </template>
   </el-row>
 </template>
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import ComponentView from './component-view.vue'
 
-export default  defineComponent({
-  name: 'formView',
-  components: {
-    ComponentView,
+const props = defineProps({
+  columnList: {
+    type: Array,
+    default: () => [],
   },
-  props: {
-    columnList: {
-      type: Array,
-      default: () => [],
-    },
-    formData: {
-      type: Object,
-      default: () => {},
-    },
-    columnSpan: {
-      type: Number,
-      default: 12,
-    },
+  formData: {
+    type: Object,
+    default: () => {},
   },
-  setup(props, context) {
-    // console.log(props, 'setup.formView')
-  }
+  columnSpan: {
+    type: Number,
+    default: 12,
+  },
 })
 </script>
 <style scoped></style>

@@ -12,8 +12,8 @@
   </el-form-item>
 </template>
 <script setup>
-import { defineProps, computed, defineEmits } from "vue"
-  const emits = defineEmits(["update:data"])
+import {computed } from "vue"
+  const emit = defineEmits(["update:data"])
   const props = defineProps({
     column: {
       type: [Object],
@@ -37,7 +37,7 @@ import { defineProps, computed, defineEmits } from "vue"
     },
     set: function(val) {
       // props.data = val
-      emits('update:data', val)
+      emit('update:data', val)
     },
   })
 </script>

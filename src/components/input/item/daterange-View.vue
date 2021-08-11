@@ -11,10 +11,11 @@
     </el-date-picker>
   </el-form-item>
 </template>
-<script>
-import { defineComponent, computed}  from 'vue'
-export default defineComponent({
-  props:{
+<script setup>
+import { computed }  from 'vue'
+const emit = defineEmits(["update:data"])
+
+  const props = defineProps({
     column: {
       type: [Object],
       default: () => {},
@@ -23,20 +24,13 @@ export default defineComponent({
       type: Array,
       default: () => {},
     },
-  },
-   setup(props,context) {
-    const value =computed ({
-      get: function() {
-        return props.data
-      },
-      set: function(val) {
-        // props.data = val
-        context.emit('update:data', val)
-      },
-    })
-    return {
-      value
+  })
+  const value =computed ({
+    get: function() {
+      return props.data
+    },
+    set: function(val) {
+      emit('update:data', val)
     }
-   }
-})
+  })
 </script>
