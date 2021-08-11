@@ -33,7 +33,7 @@
   </div>
 </template>
 <script>
-import { defineComponent, reactive, toRefs, ref } from "@vue/runtime-core";
+import { defineComponent, reactive, toRefs, ref } from "vue";
 import FormView from "../components/input/form-view.vue";
 import VueJsonEditor from '../components/json/vue-json-editor.vue'
 

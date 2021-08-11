@@ -1,8 +1,15 @@
 <!--简单文本框-->
 <template>
     <el-form-item :label="column.title" :prop="column.name" :rules="rules" style="display: flex; flex-direction:row;">
-        <el-input v-model="leftValue" :name="column.text.name" style="width:50%;"></el-input>
-        <el-input v-model="rightValue" :name="column.select.name" style="width:50%;"> </el-input>
+        <el-input v-model="leftValue" :name="column.text.name" style="width:70%;"></el-input>
+        <el-select v-model="value" placeholder="请选择" style="width:30%;">
+            <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+            </el-option>
+        </el-select>
     </el-form-item>
   </template>
   <script>
@@ -20,6 +27,24 @@
       },
     },
     setup(props, context) {
+      console.log(props, 'text-select-view')
+      const options = [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }]
+
       console.log('text-select')
       const { column } = props
     
@@ -41,7 +66,6 @@
           return props.data
         },
         set: function(val) {
-          // props.data = val
           context.emit('update:data',val)
         }
       })
@@ -50,6 +74,7 @@
           ...toRefs(state),
         rules,
         value,
+        options
       }
     }
   })
