@@ -15,7 +15,7 @@
 <script setup>
 import { computed, reactive, toRefs } from 'vue'
 import { getContentTypeList } from '@/mock/api'
-  const emits = defineEmits(["update:data"])
+  const emit = defineEmits(["update:data"])
   const props = defineProps ({
     column: {
       type: [Object],
@@ -49,7 +49,7 @@ import { getContentTypeList } from '@/mock/api'
       return props.data
     },
     set: function(val) {
-      emits('update:data', val)
+      emit('update:data', val)
     },
   })
 

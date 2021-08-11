@@ -30,6 +30,7 @@ import { getContentTypeList } from '@/mock/api'
   } else if( typeof codeTable === 'string' ) {
     getList(codeTable)
   }
+  
   const value =computed ({
     get: function() {
       return props.data
