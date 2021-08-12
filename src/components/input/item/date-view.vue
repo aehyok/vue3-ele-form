@@ -1,46 +1,43 @@
-<!--简单文本框-->
+<!--日期格式类型-->
 <template>
   <el-form-item :label="column.title" :prop="column.name" :rules="rules">
-    <el-input
+    <el-date-picker
+      style="width:100%"
       v-model="value"
-      type="textarea"
-      :placeholder="'请输入' + column.title"
-      :rows="column.rows"
-      maxlength="30"
+      type="date"
+      placeholder="选择日期"
     >
-    </el-input>
+    </el-date-picker>
   </el-form-item>
 </template>
 <script setup>
-import {computed } from "vue"
+import { computed, reactive } from 'vue'
   const emit = defineEmits(["update:data"])
   const props = defineProps({
     column: {
       type: [Object],
-      default: () => {
-        return {
-          rows: 3
-        }
-      },
+      default: () => {},
     },
     data: {
       type: String,
       default: '',
     },
   })
-  const { column }  = props
+  const { column, data } = props
+  const state = reactive({
+    data: data
+  })
   const rules = [
     {
       required: column.required,
       message: `请输入${column.title}`,
     },
   ]
-  const value =computed ({
+  const value = computed ({
     get: function() {
       return props.data
     },
     set: function(val) {
-      // props.data = val
       emit('update:data', val)
     },
   })

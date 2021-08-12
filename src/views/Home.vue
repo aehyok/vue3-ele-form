@@ -69,6 +69,12 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           ],
         },
         {
+          name: "name1",
+          type: "text",
+          title: "地块名称：",
+          required: true // 必填
+        },
+        {
           type: "TextSelect",
           title: "地块面积：",
           text: {
@@ -89,18 +95,18 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
             { id:"4", text: "林地"},
           ],
           title: "地块所属：",
-          required: true
         },
         {
-          name: "name1",
-          type: "text",
-          title: "地块名称：",
-          required: true // 必填
+          name: "location",
+          type: "textarea",
+          title: "地块位置",
+          // row: 6,
         },
         {
           name: "descript",
           type: "textarea",
           title: "备注",
+          rows: 6,
         },
         {
           name: "name",
@@ -147,7 +153,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         },
         {
           name: "type",
-          type: "radio",
+          type: "select",
           codeTable: "type",
           title: "栏目类型",
           controls: [

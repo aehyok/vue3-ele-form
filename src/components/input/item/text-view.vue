@@ -1,47 +1,37 @@
 <!--简单文本框-->
 <template>
   <el-form-item :label="column.title" :prop="column.name" :rules="rules">
-    <el-input
-      v-model="value"
-      type="textarea"
-      :placeholder="'请输入' + column.title"
-      :rows="column.rows"
-      maxlength="30"
-    >
-    </el-input>
+    <el-input v-model="value" :name="column.name"> </el-input>
   </el-form-item>
 </template>
 <script setup>
-import {computed } from "vue"
+import { computed } from 'vue'
   const emit = defineEmits(["update:data"])
   const props = defineProps({
     column: {
       type: [Object],
-      default: () => {
-        return {
-          rows: 3
-        }
-      },
+      default: () => {},
     },
     data: {
       type: String,
       default: '',
     },
   })
-  const { column }  = props
+  const { column } = props
   const rules = [
     {
       required: column.required,
       message: `请输入${column.title}`,
-    },
+      trigger: ['blur', 'change'],
+    }
   ]
-  const value =computed ({
+
+  const value = computed({
     get: function() {
       return props.data
     },
     set: function(val) {
-      // props.data = val
-      emit('update:data', val)
-    },
+      emit('update:data',val)
+    }
   })
 </script>
