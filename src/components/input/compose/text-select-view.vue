@@ -2,7 +2,7 @@
 <template>
     <el-form-item :label="column.title" :prop="column.name" :rules="rules" style="display: flex; flex-direction:row;">
         <el-input v-model="leftValue" :name="column.text.name" style="width:70%;"></el-input>
-        <el-select v-model="value" placeholder="请选择" style="width:30%;">
+        <el-select v-model="rightValue" placeholder="请选择" style="width:30%;">
             <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -14,23 +14,27 @@
 </template>
 <script setup>
 import { computed, toRefs,reactive } from 'vue'
-const emit = defineEmits(["update:data"])
+const emit = defineEmits(["update:leftValue","update:rightValue"])
 const props = defineProps({
     column: {
         type: [Object],
         default: () => {},
     },
-    data: {
+    leftValue: {
+        type: String,
+        default: '',
+    },
+    rightValue: {
         type: String,
         default: '',
     },
 })
 console.log(props, 'text-select-view')
 const options = [{
-    value: '1',
+    value: '11',
     label: 'm2'
 }, {
-    value: '2',
+    value: '22',
     label: '亩'
 }]
 
@@ -38,8 +42,8 @@ console.log('text-select')
 const { column } = props
 
 const state = reactive({
-    leftValue: "2",
-    rightValue: "3"
+    leftValue: props.leftValue,
+    rightValue: props.rightValue
 })
 
 const rules = [
@@ -49,12 +53,21 @@ const rules = [
     trigger: ['blur', 'change'],
 }]
 
-const value = computed({
+const leftValue = computed({
     get: function() {
-        return props.data
+        return props.leftValue
     },
     set: function(val) {
-        emit('update:data',val)
+        emit('update:leftValue',val)
+    }
+})
+
+const rightValue = computed({
+    get: function() {
+        return props.rightValue
+    },
+    set: function(val) {
+        emit('update:rightValue',val)
     }
 })
 </script>

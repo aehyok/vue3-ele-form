@@ -4,11 +4,22 @@
 >
   <!--不包含View则是npm组件库中的-->
   <component
-    v-if="!column.type.includes('View')"
+    v-if="!column.type.includes('View') && column.type !=='TextSelect'"
     :is="column.type + 'View'"
     :column="column"
     :formData="formData"
     v-model:data="formData[column.name]"
+    :columnSpan="columnSpan"
+  />
+
+  <!--针对组合录入控件进行单独设置处理--->
+  <component
+    v-if="!column.type.includes('View') && column.type ==='TextSelect'"
+    :is="column.type + 'View'"
+    :column="column"
+    :formData="formData"
+    v-model:leftValue="formData[column.text.name]"
+    v-model:rightValue="formData[column.select.name]"
     :columnSpan="columnSpan"
   />
   <component
@@ -22,7 +33,7 @@
 </el-col>
 </template>
 <script>
-import { createApp, defineComponent } from 'vue'
+import { createApp, defineComponent,computed } from 'vue'
 import TextView from '@/components/input/item/text-view.vue'
 import TextareaView from '@/components/input/item/textarea-view.vue'
 import NumberView from '@/components/input/item/number-view.vue'
@@ -68,19 +79,30 @@ export default  defineComponent({
     },
   },
   setup(props, context) {
-    console.log(props, 'setup.componentView')
+    console.log(props.column.type, 'setup.componentView')
+    if(props.column.type === 'TextSelect') {
+      console.log('text-----------------select')
+      console.log(props.formData, props.column)
+    }
+
     const registerComponent = (componentName) => {
       console.log(componentName, 'this.componentName')
       return createApp(componentName.default)
-      // return import(`@/components/input/item/${componentName}.vue`).then(
-      //   component => {
-      //     console.log(component, 'component')
-      //     return Vue.extend(component.default)
-      //   },
-      // )
     }
-    return {
 
+
+    // const compose = computed({
+    //   get: function() {
+    //     let array = []
+    //     console.log(props, 'compose')
+    //     array.push({"text":props.formData[column.text.name]})
+    //     array.push({"select": props.formData[column.text.select]})
+    //     return array
+    //   }
+    // })
+
+    return {
+      // compose
     }
   },
 })

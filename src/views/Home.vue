@@ -109,6 +109,37 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           rows: 6,
         },
         {
+          name: "type11",
+          type: "select",
+          codeTable: [
+            {id :"1", text: "图片"},
+            {id :"2", text: "视频"}
+          ],
+          title: "图片/视频",
+          controls: [
+            {
+              value: "1",
+              showCondition: [
+                {
+                  name: "image11",
+                  type: "image",
+                  title: "上传图片"
+                }
+              ]
+            },
+            {
+              value: "2",
+              showCondition: [
+                {
+                  name: "isValids11",
+                  type: "video",
+                  title: "上传视频"
+                }
+              ]
+            }
+          ]
+        },        
+        {
           name: "name",
           type: "text",
           title: "栏目名称"
@@ -150,44 +181,6 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           type: "switch",
           title: "是否过期",
           required: true
-        },
-        {
-          name: "type",
-          type: "select",
-          codeTable: "type",
-          title: "栏目类型",
-          controls: [
-            {
-              value: 1,
-              showCondition: [
-                {
-                  name: "show",
-                  type: "radio",
-                  codeTable: [
-                    { id: 1, text: "China" },
-                    { id: 2, text: "English" }
-                  ],
-                  title: "测试类型",
-                  required: true
-                },
-                {
-                  name: "image1",
-                  type: "image",
-                  title: "文件"
-                }
-              ]
-            },
-            {
-              value: 2,
-              showCondition: [
-                {
-                  name: "isValids",
-                  type: "switch",
-                  title: "是否有效"
-                }
-              ]
-            }
-          ]
         },
         {
           name: "requireType",
@@ -237,7 +230,10 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         creType: "",
         range: [],
         isExpired: false,
-        isValid: true
+        isValid: true,
+        type11: '1',
+        area: "2",
+        unit:"1"
       }
     }
   });
