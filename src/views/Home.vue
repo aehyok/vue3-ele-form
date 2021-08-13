@@ -82,6 +82,10 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           },
           select: {
             name: "unit",
+            codeTable:[
+            { id:"1", text: "M²"},
+            { id:"2", text: "亩"},
+            ]
           }
         },
         {

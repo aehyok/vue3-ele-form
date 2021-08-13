@@ -4,10 +4,10 @@
         <el-input v-model="leftValue" :name="column.text.name" style="width:70%;"></el-input>
         <el-select v-model="rightValue" placeholder="请选择" style="width:30%;">
             <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                v-for="item in column.select.codeTable"
+                :key="item.id"
+                :label="item.text"
+                :value="item.id">
             </el-option>
         </el-select>
     </el-form-item>
@@ -29,22 +29,9 @@ const props = defineProps({
         default: '',
     },
 })
-console.log(props, 'text-select-view')
-const options = [{
-    value: '11',
-    label: 'm2'
-}, {
-    value: '22',
-    label: '亩'
-}]
 
 console.log('text-select')
 const { column } = props
-
-const state = reactive({
-    leftValue: props.leftValue,
-    rightValue: props.rightValue
-})
 
 const rules = [
 {
