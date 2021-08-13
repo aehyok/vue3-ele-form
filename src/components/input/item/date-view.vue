@@ -1,6 +1,6 @@
 <!--日期格式类型-->
 <template>
-  <el-form-item :label="column.title" :prop="column.name" :rules="rules">
+  <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
     <el-date-picker
       style="width:100%"
       v-model="value"

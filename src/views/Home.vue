@@ -54,12 +54,12 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         {
           name: "staticData",
           type: "static",
-          title: "社区/村：",
+          title: "社区/村",
         },
         {
           name: "creType",
           type: "select",
-          title: "地块类型：",
+          title: "地块类型",
           required: true,
           codeTable: [
             { id:"1", text: "耕地"},
@@ -71,12 +71,12 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         {
           name: "name1",
           type: "text",
-          title: "地块名称：",
+          title: "地块名称",
           required: true // 必填
         },
         {
           type: "TextSelect",
-          title: "地块面积：",
+          title: "地块面积",
           text: {
             name: "area",
           },
@@ -94,7 +94,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
             { id:"3", text: "自留地"},
             { id:"4", text: "林地"},
           ],
-          title: "地块所属：",
+          title: "地块所属",
         },
         {
           name: "location",

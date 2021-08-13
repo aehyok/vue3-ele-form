@@ -1,6 +1,6 @@
 <!--简单文本框-->
 <template>
-  <el-form-item :label="column.title" :prop="column.name" :rules="rules">
+  <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
     <el-input
       v-model="value"
       type="textarea"

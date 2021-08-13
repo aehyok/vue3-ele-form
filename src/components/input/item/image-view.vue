@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="column.title" :prop="column.name" :rules="rules">
+  <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
     <div class="upload">
       <el-upload
         class="avatar-uploader"

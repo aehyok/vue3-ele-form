@@ -1,6 +1,6 @@
 <!--简单文本框-->
 <template>
-    <el-form-item :label="column.title" :prop="column.name" :rules="rules" style="display: flex; flex-direction:row;">
+    <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules" style="display: flex; flex-direction:row;">
         <el-input v-model="leftValue" :name="column.text.name" style="width:70%;"></el-input>
         <el-select v-model="rightValue" placeholder="请选择" style="width:30%;">
             <el-option

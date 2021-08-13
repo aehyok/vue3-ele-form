@@ -1,6 +1,6 @@
 <!--radio 单选框-->
 <template>
-    <el-form-item :label="column.title" :prop="column.name" :rules="rules">
+    <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
       <el-radio-group v-model="value" @change="radioChange">
         <el-radio v-for="item in state.list" :label="item.id" :key="item.id">
           {{ item.text }}

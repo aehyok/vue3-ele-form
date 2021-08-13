@@ -1,6 +1,6 @@
 <!--checkbox 多选框-->
 <template>
-  <el-form-item :label="column.title" :prop="column.columnName">
+  <el-form-item :label="column.title+'：'" :prop="column.columnName">
     <el-checkbox-group v-model="value">
       <el-checkbox v-for="item in state.list" :label="item.id" :key="item.id">{{
         item.text

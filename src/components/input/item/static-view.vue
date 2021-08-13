@@ -1,6 +1,6 @@
 <!--简单文本框-->
 <template>
-    <el-form-item :label="column.title" :prop="column.name">
+    <el-form-item :label="column.title+'：'" :prop="column.name">
         <span>{{value}}</span>
     </el-form-item>
 </template>

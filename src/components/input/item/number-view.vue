@@ -1,6 +1,6 @@
 <!--number数值类型-->
 <template>
-  <el-form-item :label="column.title" :prop="column.name" :rules="rules">
+  <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
     <el-input type="number" v-model="value"></el-input>
   </el-form-item>
 </template>
