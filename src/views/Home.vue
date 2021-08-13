@@ -75,7 +75,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           required: true // 必填
         },
         {
-          type: "TextSelect",
+          type: "textSelect",
           title: "地块面积",
           text: {
             name: "area",
@@ -110,6 +110,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           name: "descript",
           type: "textarea",
           title: "备注",
+          required: true,
           rows: 6,
         },
         {
@@ -136,7 +137,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
               showCondition: [
                 {
                   name: "isValids11",
-                  type: "video",
+                  type: "image",
                   title: "上传视频"
                 }
               ]
