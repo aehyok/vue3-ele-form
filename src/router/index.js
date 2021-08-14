@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Table from "../views/Table.vue";
+import Dragger from "../views/Dragger.vue";
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: "/table",
     name: "Table",
     component: Table
+  },
+  {
+    path: "/dragger",
+    name: "Dragger",
+    component: Dragger
   },
   {
     path: "/about",
