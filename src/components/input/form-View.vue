@@ -8,6 +8,7 @@
         :columnSpan="columnSpan"
         :column="item"
         :formData="formData"
+        @click="componentExampleClick"
       />
         <template v-for="(child) in item.controls ">
             <template v-if="formData[item.name] === child.value">
@@ -39,6 +40,12 @@ const props = defineProps({
     type: Number,
     default: 12,
   },
+  componentExampleClick: {
+    type: Function,
+    default: () => {
+      
+    }
+  }
 })
 </script>
 <style scoped></style>
