@@ -6,6 +6,8 @@
       type="textarea"
       :placeholder="'请输入' + column.title"
       :rows="column.rows"
+      :maxlength="column.maxlength"
+      :minlength="column.minlength"
     >
     </el-input>
   </el-form-item>
@@ -17,9 +19,6 @@ import {computed } from "vue"
     column: {
       type: [Object],
       default: () => {
-        return {
-          rows: 3
-        }
       },
     },
     data: {
@@ -27,7 +26,11 @@ import {computed } from "vue"
       default: '',
     },
   })
+
   const { column }  = props
+  if(column && !column.rows) {
+    column.rows = 3
+  }
 
   const rules = [
     {
@@ -42,7 +45,6 @@ import {computed } from "vue"
       return props.data
     },
     set: function(val) {
-      // props.data = val
       emit('update:data', val)
     },
   })

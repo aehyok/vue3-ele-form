@@ -1,6 +1,6 @@
 <!--radio 单选框-->
 <template>
-    <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
+    <el-form-item :label="column.title +'：'" :prop="column.name" :rules="rules">
       <el-radio-group v-model="value" @change="radioChange">
         <el-radio v-for="item in state.list" :label="item.id" :key="item.id">
           {{ item.text }}
@@ -11,6 +11,7 @@
 <script setup>
 import { getContentTypeList } from '@/mock/api'
 import { computed, reactive } from 'vue'
+  const emit = defineEmits(["update:data"])
   const props = defineProps({
     column: {
       type: [Object],
@@ -26,15 +27,17 @@ import { computed, reactive } from 'vue'
     },
   })
   const { column } = props
-  let { codeTable } = props.column.codeTable
+  let { codeTable } = props.column
+  const state = reactive({
+    list: []
+  })
 
   if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
-    // codeTable = 'type'
     state.list = codeTable
-    console.log(state.list , 'codeTable')
   } else if( typeof codeTable === 'string' ) {
     getList(codeTable)
   }
+
   const rules = [
     {
       // 加上双？？，防止出现选中后提示请选择"this.column.title"
@@ -43,12 +46,13 @@ import { computed, reactive } from 'vue'
       trigger: 'change',
     },
   ]
+
   const value =computed ({
     get: function() {
       return props.data
     },
     set: function(val) {
-      context.emit('update:data', val)
+      emit('update:data', val)
     },
   })
 
@@ -56,21 +60,12 @@ import { computed, reactive } from 'vue'
   // 要通过一个字段控制，如果是这个字段，则可以进行控制切换状态
   const radioChange = (e) => {
     console.log(e, column, 'this.radioChange')
-    context.emit("evenName", '')
+    // emit('update:data', val)
   }
 
-  const state = reactive({
-    list: []
-  })
   const getList = (type) => {
     getContentTypeList(type).then( res => {
       state.list = res.data
     })
   }
 </script>
-<style scoped>
-:deep(.el-form-item__content) {
-  /* display: flex; */
-  /* ; */
-}
-</style>

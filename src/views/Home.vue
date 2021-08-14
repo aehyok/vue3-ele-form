@@ -62,10 +62,10 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           title: "地块类型",
           required: true,
           codeTable: [
-            { id:"1", text: "耕地"},
-            { id:"2", text: "宅基地"},
-            { id:"3", text: "自留地"},
-            { id:"4", text: "林地"},
+            { id: 1, text: "耕地"},
+            { id: 2, text: "宅基地"},
+            { id: 3, text: "自留地"},
+            { id: 4, text: "林地"},
           ],
         },
         {
@@ -93,10 +93,10 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           type: "select",
           // multiple: true,
           codeTable: [
-            { id:"1", text: "耕地"},
-            { id:"2", text: "宅基地"},
-            { id:"3", text: "自留地"},
-            { id:"4", text: "林地"},
+            { id: 1, text: "耕地"},
+            { id: 2, text: "宅基地"},
+            { id: 3, text: "自留地"},
+            { id: 4, text: "林地"},
           ],
           title: "地块所属",
         },
@@ -112,18 +112,20 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           title: "备注",
           required: true,
           rows: 6,
+          maxlength: 10,
+          minlength: 4
         },
         {
           name: "type11",
           type: "select",
           codeTable: [
-            {id :"1", text: "图片"},
-            {id :"2", text: "视频"}
+            {id : 1, text: "图片"},
+            {id : 2, text: "视频"}
           ],
           title: "图片/视频",
           controls: [
             {
-              value: "1",
+              value: 1,
               showCondition: [
                 {
                   name: "image11",
@@ -133,7 +135,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
               ]
             },
             {
-              value: "2",
+              value: 2,
               showCondition: [
                 {
                   name: "isValids11",
@@ -190,7 +192,11 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         {
           name: "requireType",
           type: "radio",
-          codeTable: "isp",
+          codeTable: [
+            {id : 1, text: "图片"},
+            {id : 2, text: "视频"},
+            {id : 3, text: "图文"},
+          ],
           title: "图文类型",
           required: true
         },
@@ -232,13 +238,14 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         createDate: 1606730360386,
         type: 1,
         requireType: undefined,
-        creType: "",
+        creType: undefined,
         range: [],
         isExpired: false,
         isValid: true,
-        type11: '1',
+        type11: 1,
         area: "2",
-        unit:"1"
+        unit:"1",
+        requireType: 1,
       }
     }
   });

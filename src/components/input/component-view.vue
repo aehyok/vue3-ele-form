@@ -4,24 +4,14 @@
 >
   <!--不包含View则是npm组件库中的-->
   <component
-    v-if="!column.type.includes('View') && column.type !=='textSelect'"
+    v-if="(!column.type.includes('View')) && isIncludes" 
     :is="column.type + 'View'"
     :column="column"
     :formData="formData"
     v-model:data="formData[column.name]"
     :columnSpan="columnSpan"
   />
-
-  <!--针对组合录入控件进行单独设置处理--->
-  <component
-    v-if="!column.type.includes('View') && column.type ==='textSelect'"
-    :is="column.type + 'View'"
-    :column="column"
-    :formData="formData"
-    v-model:leftValue="formData[column.text.name]"
-    v-model:rightValue="formData[column.select.name]"
-    :columnSpan="columnSpan"
-  />
+  <!--可单独自定义录入组件-->
   <component
     v-if="column.type.includes('View')"
     :is="column.type || registerComponent"
@@ -48,6 +38,7 @@ import switchView from '@/components/input/item-view/switchView.vue'
 
 // 组合式录入控件
 import textSelectView from '@/components/input/compose-view/textSelectView.vue'
+import numberSelectView from '@/components/input/compose-view/numberSelectView.vue'
 export default  defineComponent({
   name: 'formView',
   components: {
@@ -63,6 +54,7 @@ export default  defineComponent({
     imageView,
     staticView,
     textSelectView,
+    numberSelectView
   },
   props: {
     column: {
@@ -90,7 +82,9 @@ export default  defineComponent({
       return createApp(componentName.default)
     }
 
-
+    const isIncludes = () => {
+      ["textSelect","numberSelect"].includes(column.type)
+    }
     // const compose = computed({
     //   get: function() {
     //     let array = []
@@ -102,7 +96,7 @@ export default  defineComponent({
     // })
 
     return {
-      // compose
+      isIncludes
     }
   },
 })

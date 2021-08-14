@@ -22,8 +22,8 @@ import { getContentTypeList } from '@/mock/api'
       default: () => {},
     },
     data: {
-      type: String,
-      default: () => {},
+      type: Number,
+      default: undefined,
     },
   })
 
