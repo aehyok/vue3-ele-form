@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Table from "../views/Table.vue";
 import Dragger from "../views/Dragger.vue";
+import FormConfig from "../views/FormConfig.vue"
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     path: "/table",
     name: "Table",
     component: Table
+  },
+  {
+    path: "/formconfig",
+    name: "FormConfig",
+    component: FormConfig
   },
   {
     path: "/dragger",

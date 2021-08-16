@@ -34,7 +34,7 @@
 </template>
 <script setup>
 import {reactive, toRefs, ref } from "vue";
-import FormView from "../components/input/form-view.vue";
+import FormView from "../components/form-view.vue";
 import VueJsonEditor from '../components/json/vue-json-editor.vue'
 
   let refs = ref("");

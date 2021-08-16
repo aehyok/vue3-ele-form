@@ -1,4 +1,4 @@
-import FormView from "./components/input/form-view.vue";
+import FormView from "./components/form-view.vue";
 import SlTable from "./components/table/index.vue";
 import VueJsonEditor from './components/json/vue-json-editor.vue';
 

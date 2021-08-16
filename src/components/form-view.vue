@@ -25,7 +25,7 @@
   </el-row>
 </template>
 <script setup>
-import ComponentView from './component-view.vue'
+import ComponentView from './input/component-view.vue'
 
 const props = defineProps({
   columnList: {
