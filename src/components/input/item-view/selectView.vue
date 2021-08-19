@@ -42,7 +42,7 @@ import { getContentTypeList } from '@/mock/api'
   if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
     // codeTable = 'type'
     state.list = codeTable
-    console.log(state.list , 'codeTable')
+    console.log(state.list , 'codeTable------------')
   } else if( typeof codeTable === 'string' ) {
     getList(codeTable)
   }

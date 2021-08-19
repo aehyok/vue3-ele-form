@@ -20,12 +20,11 @@
                 </el-row>
             </div>
             <div class="center">
-                <el-form :model="state.formConfig.formData" label-width="120px"  >
-                    <DragFormView
+                <el-form :model="state.formConfig.formData" label-width="120px" ref="refForm" style="width: 100%;">
+                    <drag-form-view
                         :columnList="state.formConfig.formListItem"
                         :formData="state.formConfig.formData"
                         :columnSpan="state.formConfig.columnSpan"
-                        @componentExampleClick = "componentExampleClick"
                     />
                 </el-form>
             </div>
@@ -50,32 +49,32 @@ import shortid from 'shortid';
       }
     const state = reactive({
         options: {
-        mode: "code",
-        mainMenuBar: false
+            mode: "code",
+            mainMenuBar: false
         },
         show: true,
-        formConfig: {
-        columnSpan: 24,
-        formListItem: [
-            
-        ],
-        formData: {
-            staticData: '测试数据组合',
-            name: "主菜单栏目",
-            total: null,
-            count: null,
-            createDate: 1606730360386,
-            type: 1,
-            requireType: undefined,
-            creType: undefined,
-            range: [],
-            isExpired: false,
-            isValid: true,
-            type11: 1,
-            area: "2",
-            unit:"1",
-            requireType: 1,
-        }
+        formConfig: { 
+            columnSpan: 24,  
+            formListItem: [
+                
+            ],
+            formData: {
+                staticData: '测试数据组合',
+                name: "主菜单栏目",
+                total: null,
+                count: null,
+                createDate: 1606730360386,
+                type: 1,
+                requireType: undefined,
+                creType: undefined,
+                range: [],
+                isExpired: false,
+                isValid: true,
+                type11: 1,
+                area: "2",
+                unit:"1",
+                requireType: 1,
+            }
         }
     });
 
@@ -153,7 +152,12 @@ import shortid from 'shortid';
             title: item.title
         }
         if(item.codeTable) {
-            column.codeTable = []
+            column.codeTable = [
+                { id: 1, text: "耕地"},
+                { id: 2, text: "宅基地"},
+                { id: 3, text: "自留地"},
+                { id: 4, text: "林地"}
+            ]
         }
         state.formConfig.formListItem.push(column)
     }

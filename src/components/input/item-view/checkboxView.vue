@@ -1,6 +1,6 @@
 <!--checkbox 多选框-->
 <template>
-  <el-form-item :label="column.title+'：'" :prop="column.columnName">
+  <el-form-item :label="column.title +'：'" :prop="column.columnName">
     <el-checkbox-group v-model="value">
       <el-checkbox v-for="item in state.list" :label="item.id" :key="item.id">{{
         item.text
@@ -11,6 +11,7 @@
 <script setup>
 import { computed, reactive, toRefs } from 'vue'
 import { getContentTypeList } from '@/mock/api'
+  const emit = defineEmits(["update:data"])
   const props = defineProps({
     column: {
       type: [Object],
@@ -19,25 +20,6 @@ import { getContentTypeList } from '@/mock/api'
     data: {
       type: Array,
       default: () => [],
-    },
-  })
-  let { codeTable } = props.column.codeTable
-
-  if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
-    // codeTable = 'type'
-    state.list = codeTable
-    console.log(state.list , 'codeTable')
-  } else if( typeof codeTable === 'string' ) {
-    getList(codeTable)
-  }
-  
-  const value =computed ({
-    get: function() {
-      return props.data
-    },
-    set: function(val) {
-      // props.data = val
-      context.emit('update:data', val)
     },
   })
 
@@ -49,4 +31,20 @@ import { getContentTypeList } from '@/mock/api'
       state.list = res.data
     })
   }
+  let { codeTable } = props.column
+  if(typeof codeTable === 'object'  && codeTable.constructor === Array) {
+    state.list = codeTable
+    console.log(state.list , 'codeTable-----checkbox')
+  } else if( typeof codeTable === 'string' ) {
+    getList(codeTable)
+  }
+  
+  const value =computed ({
+    get: function() {
+      return props.data
+    },
+    set: function(val) {
+      emit('update:data', val)
+    }
+  })
 </script>

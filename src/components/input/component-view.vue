@@ -4,13 +4,24 @@
 >
   <!--不包含View则是npm组件库中的-->
   <component
-    v-if="(!column.type.includes('View')) && isIncludes" 
+    v-if="(!column.type.includes('View')) && !column.type.includes('textSelect')" 
     :is="column.type + 'View'"
     :column="column"
     :formData="formData"
     v-model:data="formData[column.name]"
     :columnSpan="columnSpan"
   />
+
+  <component
+    v-if="(column.type.includes('textSelect'))" 
+    :is="column.type + 'View'"
+    :column="column"
+    :formData="formData"
+    v-model:leftValue="formData[column.text.name]"
+    v-model:rightValue="formData[column.select.name]"
+    :columnSpan="columnSpan"
+  />
+
   <!--可单独自定义录入组件-->
   <component
     v-if="column.type.includes('View')"
@@ -83,7 +94,8 @@ export default  defineComponent({
     }
 
     const isIncludes = () => {
-      ["textSelect","numberSelect"].includes(column.type)
+      console.log(["textSelect","numberSelect"].includes(column.type), 'text-number----select')
+      return ["textSelect","numberSelect"].includes(column.type)
     }
     // const compose = computed({
     //   get: function() {
