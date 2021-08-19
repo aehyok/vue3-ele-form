@@ -77,6 +77,9 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
         {
           type: "textSelect",
           title: "地块面积",
+          rules:[
+              { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入数字最多两位小数' }
+          ],
           text: {
             name: "area",
           },
