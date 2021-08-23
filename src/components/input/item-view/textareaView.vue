@@ -40,10 +40,10 @@ import {computed, ref } from "vue"
       trigger: ['blur', 'change'],
     }
   ]
+  
   if (column && column.rules) {
     console.log(rules,column.rules, 'column.rules-----------')
-    
-      rules.value = [...rules.value, ...column.rules]
+    rules.value = [...rules.value, ...column.rules]
   }
   
   const value =computed ({
