@@ -5,7 +5,7 @@
   </el-form-item>
 </template>
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
   const emit = defineEmits(["update:data"])
   const props = defineProps({
     column: {
@@ -18,13 +18,20 @@ import { computed } from 'vue'
     },
   })
   const { column } = props
-  const rules = [
+ 
+  const rules = ref([])
+  rules.value = [
     {
       required: column.required,
       message: `请输入${column.title}`,
       trigger: ['blur', 'change'],
     }
   ]
+  if (column && column.rules) {
+    console.log(rules,column.rules, 'column.rules-----------')
+    
+      rules.value = [...rules.value, ...column.rules]
+  }
 
   const value = computed({
     get: function() {

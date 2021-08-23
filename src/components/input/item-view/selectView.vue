@@ -1,7 +1,7 @@
 <!--简单文本框-->
 <template>
   <el-form-item :label="column.title+'：'" :prop="column.name" :rules="rules">
-    <el-select v-model="value"  :placeholder="'请选择' + column.title" style="width:100%;">
+    <el-select v-model="value" clearable  :placeholder="'请选择' + column.title" style="width:100%;" @change="changeSelectClick" @clear="clearClick">
       <el-option
         v-for="item in state.list"
         :key="item.id"
@@ -53,6 +53,7 @@ import { getContentTypeList } from '@/mock/api'
       message: `请选择${column.title}`,
     },
   ]
+
   const value =computed ({
     get: function() {
       return props.data
@@ -62,4 +63,17 @@ import { getContentTypeList } from '@/mock/api'
     },
   })
 
+  const changeSelectClick = (item) => {
+    console.log(item ,'current-select-item')
+    if(props.column && props.column.changeFunction) {
+      console.log(item ,'current-select-item------------22222222222')
+      props.column.changeFunction(item)
+    }
+  }
+
+  const clearClick = () => {
+    if(props.column && props.column.changeFunction) {
+      props.column.changeFunction(0)
+    }
+  }
 </script>

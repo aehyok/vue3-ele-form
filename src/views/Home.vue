@@ -2,10 +2,10 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="12">
-        <el-form :model="state.formConfig.formData" label-width="120px" :ref="dom">
+        <el-form :model="formData" label-width="120px" :ref="dom">
           <form-view
             :columnList="state.formConfig.formListItem"
-            :formData="state.formConfig.formData"
+            :formData="formData"
             :columnSpan="state.formConfig.cols"
           />
         </el-form>
@@ -42,6 +42,43 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
     refs = el;
   };
 
+  let unitList = ref([])
+  unitList.value = [{ id:"2", text: "亩"}]
+
+  let list = ref([])
+  
+  const formData = reactive({
+    staticData: '测试数据组合',
+    name: "主菜单栏目",
+    total: null,
+    count: null,
+    createDate: 1606730360386,
+    type: 1,
+    requireType: undefined,
+    creType: undefined,
+    range: [],
+    isExpired: false,
+    isValid: true,
+    type11: 1,
+    area: "2",
+    unit:"",
+    requireType: 1,
+  })
+
+  const changeUnit = (value) => {
+    console.log('unit --- unit', value===2)
+    if(value === 2) {
+      unitList.value = [{ id:"2", text: "M²"}]
+      formData.unit = "2"
+    } else if(value > 0){
+      unitList.value = [{ id:"1", text: "亩"}]
+      formData.unit = "1"
+    } else {
+      unitList.value = [{ id:"2", text: "M²"}]
+      formData.unit = ""
+    }
+  }
+
   const state = reactive({
     options: {
       mode: "code",
@@ -60,18 +97,17 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           name: "creType",
           type: "select",
           title: "地块类型",
+          changeFunction: changeUnit,
           required: true,
-          codeTable: [
-            { id: 1, text: "耕地"},
-            { id: 2, text: "宅基地"},
-            { id: 3, text: "自留地"},
-            { id: 4, text: "林地"},
-          ],
+          codeTable: list,
         },
         {
           name: "name1",
           type: "text",
           title: "地块名称",
+          rules:[
+          { pattern: /(rtmp):\/\/([\w.]+\/?)\S*/, message: '请输入rtmp://开头的地址' }
+        ],
           required: true // 必填
         },
         {
@@ -85,10 +121,7 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           },
           select: {
             name: "unit",
-            codeTable:[
-            { id:"1", text: "M²"},
-            { id:"2", text: "亩"},
-            ]
+            codeTable: unitList
           }
         },
         {
@@ -233,25 +266,15 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           title: "头像"
         }
       ],
-      formData: {
-        staticData: '测试数据组合',
-        name: "主菜单栏目",
-        total: null,
-        count: null,
-        createDate: 1606730360386,
-        type: 1,
-        requireType: undefined,
-        creType: undefined,
-        range: [],
-        isExpired: false,
-        isValid: true,
-        type11: 1,
-        area: "2",
-        unit:"1",
-        requireType: 1,
-      }
     }
   });
+
+  list.value =[
+            { id: 1, text: "耕地"},
+            { id: 2, text: "宅基地"},
+            { id: 3, text: "自留地"},
+            { id: 4, text: "林地"},
+          ]
   const submitForm = () => {
     console.log(state.formConfig.formData, "formData");
     refs.validate(valid => {
