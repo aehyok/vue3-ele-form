@@ -140,6 +140,9 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
           name: "location",
           type: "textarea",
           title: "地块位置",
+          rules:[
+          { pattern: /(rtmp):\/\/([\w.]+\/?)\S*/, message: '请输入rtmp://开头的地址' }
+        ],
           // row: 6,
         },
         {
