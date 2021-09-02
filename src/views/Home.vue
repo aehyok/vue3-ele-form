@@ -177,9 +177,9 @@ import VueJsonEditor from '../components/json/vue-json-editor.vue'
               value: 2,
               showCondition: [
                 {
-                  name: "isValids11",
-                  type: "image",
-                  title: "上传视频"
+                  name: "",
+                  type: "select",
+                  title: "未接种原因"
                 }
               ]
             }
